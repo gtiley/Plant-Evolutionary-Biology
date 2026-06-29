@@ -32,7 +32,7 @@ Activity overview
 
 |Date         |Module               | Topic                       | Assigned Reading               | Slides and Resources              |
 |-------------|---------------------------------------------------|--------------------------------------------------------------------|
-|18 August    | Introduction        | Why Plants? An overview of early plant evoluition | Syllabus | slides|
+|18 August    | Introduction        | Why Plants? An overview of early plant evolution | Syllabus | slides|
 |20 August    | Introduction        | Random variables, probability theory, and stochastic processes  | Poisson Processes |  slides|
 |25 August    | Population Genomics | Genetic Diversity | Estimating Genetic Diversity | slides |
 |27 August    | Population Genomics | Population Structure | NA  | slides|
@@ -45,7 +45,7 @@ Activity overview
 |-------------|---------------------------------------------------|--------------------------------------------------------------------|
 |22 September | Exams | First Exam: Population Genomics           | NA                               | NA                              |    
 |-------------|---------------------------------------------------|--------------------------------------------------------------------|
-|24 September | Speciation Genomics | What are species? Rules and resources | [De Queiroz 2007](https://academic.oup.com/sysbio/article-abstract/56/6/879/1653163?redirectedFrom=fulltext) | slides |
+|24 September | Speciation Genomics | What are species? Rules and resources for naming and synonymizing botanical species. | [De Queiroz 2007](https://academic.oup.com/sysbio/article-abstract/56/6/879/1653163?redirectedFrom=fulltext) | slides |
 |-------------|---------------------|--------------------------------|--------------------------------------------------------------------|
 |25 September | Class Project       | Class Project 1: Proposal Due  |  NA       | [Project Guidelines]({{site.baseurl}}/projects)                                     |
 |-----------|-----------------------|--------------------------------|-----------|--------------------------------------------------------|
