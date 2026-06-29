@@ -30,7 +30,7 @@ permalink: /about/
 
 ## Instructors
 
-[George Tiley](https://cals.ncsu.edu/plant-and-microbial-biology/people/gptiley/) - please reach out with questions about the class in advance if helpful for your planning. Details such as office hours will be posted as we get closer to the semester start date.
+[George Tiley](https://cals.ncsu.edu/plant-and-microbial-biology/people/gptiley/) - please reach out with questions about the class in advance if helpful for your planning. Office hours will be posted as we get closer to the semester start date.
 
 <!--
 | Name                 |Role                           | Contact        | Office hours                                                   |

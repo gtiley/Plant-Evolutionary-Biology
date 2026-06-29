@@ -4,9 +4,9 @@ title: Pre-Class
 permalink: /pre-class/
 ---
 
-Prior to the class, there are some required software installs for your computers. Prior experience using command line programs or programming in general can be helpful but is not necessary. Some excercises will be woven into class content or assignments given that help to develop foundational skills in approaching evolutionary biology research. I do not recommend anybody install something that I have not personally used or used in a teaching environment before.
+There will be periodic computer-based activities that might require software installs for your computers. All of these are open-source (free) and routinely used in science (safe). If you are ever confused, stop and ask for help. Activities are meant to reinforce concepts covered in class where manipulating models or simulating evolution yourself should the intended learning goals more tangible. The philiosphy behind you having the tools on your personal computer is to provide opportunity for inquiry beyond scheduled meeting times. I do not recommend anybody install something that I have not personally used or used in a teaching environment before.
 
-Additional office hours will be created in advance of computational assignments to help ensure everyone is prepared and has a positive experience with class activities.
+Prior experience using command line programs or programming in general can be helpful but is not necessary. Some excercises will be woven into class content or assignments given that help to develop foundational skills in approaching evolutionary biology research. Additional office hours will be created in advance of computational assignments to help ensure everyone is prepared and has a positive experience with class activities.
 
 
 ## Some common prerequisites
