@@ -1,0 +1,120 @@
+---
+title: "Lecture Title Here"
+subtitle: "Module · PB 495/595 Plant Evolutionary Biology"
+author: "George P. Tiley"
+date: "2026-08-25"        # set the class date
+date-format: "D MMMM YYYY"
+# format / theme / bibliography are inherited from _quarto.yml.
+# Override here only if this deck needs something different, e.g.:
+# format:
+#   revealjs:
+#     incremental: true
+---
+
+<!--
+============================================================================
+ REUSABLE TEMPLATE — copy this file to popgen/NN-topic.qmd and fill in.
+ Below are working examples of every slide pattern used in this module.
+ Delete the patterns you do not need.
+ Render a single deck with:   quarto render popgen/NN-topic.qmd
+ Live preview while editing:  quarto preview popgen/NN-topic.qmd
+
+ >> CHEAT SHEET: see slidedecknotes.md for config, SCSS, syntax, and the
+    easy-to-forget gotchas (e.g. ::::/::: colon counts, blank lines around
+    fences and $$ math, scss:defaults-before-rules). <<
+============================================================================
+-->
+
+# Section divider {.center}
+
+<!-- A level-1 header makes a section-divider slide (red band via custom.scss). -->
+
+
+## Plain bullet slide
+
+- First point
+- Second point
+- Third point
+
+
+## Bullets that reveal one at a time {.incremental}
+
+- This appears first
+- then this
+- then this
+
+
+## Full-derivation equation slide
+
+Starting from the definition, we expand step by step:
+
+$$
+\begin{aligned}
+H_t &= H_0\left(1 - \frac{1}{2N}\right)^{t} \\
+    &\approx H_0\, e^{-t/(2N)} \qquad \text{(for large } N\text{).}
+\end{aligned}
+$$
+
+::: {.callout-note}
+## Key result
+Heterozygosity decays geometrically at rate $1/2N$ per generation.
+:::
+
+
+## Equation revealed in fragments
+
+Setup line is always visible.
+
+$$ p = \frac{2N_{11} + N_{12}}{2N} $$ {.fragment}
+
+$$ q = 1 - p $$ {.fragment}
+
+
+## Two-column: equation beside a figure
+
+:::: {.columns}
+
+::: {.column width="50%"}
+$$ \pi = \frac{1}{\binom{n}{2}} \sum_{i<j} d_{ij} $$
+
+- Average pairwise differences
+- Normalize per site
+:::
+
+::: {.column width="50%"}
+::: {.figure-prompt}
+**FIGURE** — describe what to show / the source you intend to use.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "<succinct, literal description of what the figure shows>"
+  B) "<description emphasizing the take-home pattern>"
+-->
+<!-- When the figure is ready, replace the prompt above with, e.g.:
+  ![](images/your-figure.png){fig-alt="…chosen alt text…"}
+-->
+
+<span class="source">Source: Author (Year), CC BY 4.0.</span>
+:::
+
+::::
+
+::: {.notes}
+Speaker notes go here — visible in presenter view (press 's'), not on the slide.
+Remind students this assumes neutrality and equilibrium.
+:::
+
+
+## Citing the literature
+
+Most of this material follows @coop_notes. Empirical diversity ranges come
+from @leffler2012.
+
+
+# References
+
+<!-- The bibliography auto-populates from references.bib (set in _quarto.yml). -->
+
+::: {#refs}
+:::

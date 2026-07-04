@@ -1,0 +1,173 @@
+---
+title: "RevBayes practical — Molecular phylogenetics & dating"
+subtitle: "Speciation Genomics · PB 495/595 · RevBayes tutorial"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-tools: true
+    embed-resources: true
+---
+
+::: {.callout-important}
+## Draft — display only (not executed here)
+RevBayes uses the **Rev** language, which does **not** run as a Quarto cell — the code
+below is for reading and for pasting into RevBayes. **This practical has not been executed
+in this repo.** The authoritative, maintained version (with data files) is the RevBayes
+tutorial **[Time-calibrated phylogenetics / `timefig_dating`, Part 1](https://revbayes.github.io/tutorials/timefig_dating/#molecular-phylogenetics)**.
+See [`SETUP.md`](SETUP.md) for installing RevBayes + RevGadgets and getting the data.
+:::
+
+## Goal
+
+Estimate a **time-calibrated phylogeny** for Hawaiian *Kadua* (Rubiaceae) from molecular
+data, and see first-hand why **molecular data alone cannot date a tree** (the rate–time
+non-identifiability from the [dating lecture](../02-molecular-dating.qmd)).
+
+**Model pieces** (each a swappable node in the RevBayes graphical model):
+
+- substitution model: **HKY85 + Γ** (per locus),
+- **lognormal relaxed clock** (branch-specific rates),
+- **constant-rate birth–death** tree prior with a uniform root-age prior,
+- **no calibration** (the point: watch the node ages blow up).
+
+## 1. Setup and data
+
+```{.rev}
+# --- housekeeping ---
+seed(1)
+loci    = ["ITS", "ETS"]          # the tutorial ships 10 Angiosperms353 loci; 2 for speed
+n_loci  = loci.size()
+root_max = 34.0                   # Ma; max age of the Hawaiian high islands + slack
+
+# --- read the alignments ---
+for (i in 1:n_loci) {
+    data[i] = readDiscreteCharacterData("data/kadua_" + loci[i] + ".nex")
+}
+taxa    = data[1].taxa()
+n_taxa  = taxa.size()
+
+# move/monitor containers
+moves    = VectorMoves()
+monitors = VectorMonitors()
+```
+
+## 2. Tree prior — constant-rate birth–death
+
+```{.rev}
+# diversification and turnover -> birth (lambda) and death (mu) rates
+diversification ~ dnExponential(10.0)
+turnover        ~ dnExponential(10.0)
+moves.append( mvScale(diversification, weight=2) )
+moves.append( mvScale(turnover,        weight=2) )
+
+speciation := diversification + turnover      # lambda
+extinction := turnover                         # mu
+
+# uniform prior on the root age (no calibration -> wide)
+root_age ~ dnUniform(0.0, root_max)
+moves.append( mvSlide(root_age, weight=2) )
+
+rho = 27.0 / 32.0                              # ~27 of 32 species sampled
+
+timetree ~ dnBDP(lambda=speciation, mu=extinction, rootAge=root_age,
+                 rho=rho, taxa=taxa)
+
+# topology moves (comment out & clamp a fixed topology to date only)
+moves.append( mvNNI(timetree, weight=n_taxa) )
+moves.append( mvFNPR(timetree, weight=n_taxa/4) )
+moves.append( mvNodeTimeSlideUniform(timetree, weight=n_taxa) )
+```
+
+## 3. Relaxed clock
+
+```{.rev}
+# lognormal uncorrelated relaxed clock: one rate per branch
+n_branches = 2 * n_taxa - 2
+clock_mean ~ dnExponential(10.0)
+clock_sd   ~ dnExponential(3.0)
+moves.append( mvScale(clock_mean, weight=2) )
+moves.append( mvScale(clock_sd,   weight=2) )
+
+for (i in 1:n_branches) {
+    branch_rates[i] ~ dnLognormal( ln(clock_mean) - 0.5*clock_sd^2, clock_sd )
+    moves.append( mvScale(branch_rates[i], weight=1) )
+}
+```
+
+## 4. Substitution model (HKY + Γ, per locus)
+
+```{.rev}
+for (i in 1:n_loci) {
+    # base frequencies and kappa
+    pi[i]    ~ dnDirichlet( v(1,1,1,1) )
+    kappa[i] ~ dnLognormal(0.0, 1.0)
+    moves.append( mvSimplexElementScale(pi[i], weight=2) )
+    moves.append( mvScale(kappa[i], weight=2) )
+    Q[i] := fnHKY(kappa[i], pi[i])
+
+    # +Gamma4 among-site rate variation
+    alpha[i] ~ dnExponential(1.0)
+    moves.append( mvScale(alpha[i], weight=2) )
+    site_rates[i] := fnDiscretizeGamma(alpha[i], alpha[i], 4)
+
+    # per-locus relative rate multiplier
+    mu_locus[i] ~ dnExponential(1.0)
+    moves.append( mvScale(mu_locus[i], weight=2) )
+
+    # the phylogenetic CTMC, clamped to the data
+    seq[i] ~ dnPhyloCTMC(tree=timetree, Q=Q[i],
+                         branchRates=branch_rates * mu_locus[i],
+                         siteRates=site_rates[i], type="DNA")
+    seq[i].clamp( data[i] )
+}
+```
+
+## 5. MCMC
+
+```{.rev}
+mymodel = model(timetree)
+
+monitors.append( mnModel(filename="output/kadua_divtime.log", printgen=10) )
+monitors.append( mnFile(timetree, filename="output/kadua_divtime.trees", printgen=10) )
+monitors.append( mnScreen(root_age, diversification, printgen=100) )
+
+mymcmc = mcmc(mymodel, moves, monitors)
+mymcmc.run(generations=20000)     # a real run needs far more; check ESS in Tracer
+
+# summarize to a maximum-clade-credibility tree
+trace = readTreeTrace("output/kadua_divtime.trees", treetype="clock")
+mccTree(trace, file="output/kadua_divtime.mcc.tre")
+```
+
+## 6. Visualize (R + RevGadgets)
+
+```{.r}
+library(RevGadgets)
+tree <- readTrees("output/kadua_divtime.mcc.tre")
+plotFBDTree(tree, timeline = TRUE, node_age_bars = TRUE,
+            age_bars_colored_by = "posterior") +
+  ggplot2::ggtitle("Kadua — uncalibrated divergence times")
+```
+
+::: {.figure-prompt}
+**FIGURE (student output)** — the MCC chronogram with **node-age bars (95% HPD)** on a time
+axis. Expect **very wide** bars: with no calibration the ages are barely constrained.
+:::
+
+## The lesson
+
+- The topology and *relative* branch lengths are well estimated, but **absolute node ages
+  are not** — the 95% HPD intervals span most of the allowed root range.
+- This is **rate–time non-identifiability** in action. Fixing it requires **calibrations**
+  (fossils, secondary ages, or **island ages** — the natural move for a Hawaiian radiation).
+
+> **Try it:** add a calibration by replacing the uniform `root_age` with an informative
+> prior (e.g. `dnNormal` around an island-age estimate) and re-run. How much do the HPD
+> intervals shrink?
+
+## Where to go next
+
+- Authoritative scripts + all 10 loci + calibration: the
+  [`timefig_dating` tutorial](https://revbayes.github.io/tutorials/timefig_dating/).
+- Then feed the dated tree into the **diversification** and **biogeography** practicals.

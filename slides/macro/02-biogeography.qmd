@@ -1,0 +1,161 @@
+---
+title: "Biogeographic Models"
+subtitle: "Macroevolution · PB 495/595 Plant Evolutionary Biology"
+author: "George P. Tiley"
+date: "2026-11-24"
+date-format: "D MMMM YYYY"
+footer: "PB 495/595 · Plant Evolutionary Biology · Macroevolution"
+---
+
+## Where we are
+
+- We can date trees and model how traits affect diversification. **Where** did lineages
+  live, and how did **geography** shape their history?
+- **Historical biogeography** infers ancestral ranges and the processes — **dispersal,
+  extinction, cladogenesis** — that moved lineages across areas.
+- **Today:** discrete-area range models (DEC) and **geography-dependent diversification**
+  (GeoSSE).
+
+## Learning objectives
+
+By the end you should be able to:
+
+- Encode species **ranges** as discrete areas and list the biogeographic processes.
+- Explain the **DEC** model (anagenetic dispersal/extinction + cladogenetic range change).
+- Explain **GeoSSE** and how it differs from DEC.
+- Interpret an **ancestral-range** reconstruction and choose between models.
+
+# Ranges and processes {.center}
+
+## Geography as a discrete character
+
+- Divide the world into a few **areas** (e.g. old vs. young islands). A species' **range**
+  is the set of areas it occupies — a presence/absence vector.
+- Range evolves by three kinds of event:
+  - **Dispersal** — gain an area (range expansion).
+  - **(Local) extinction** — lose an area (range contraction).
+  - **Cladogenesis** — range is divided/inherited **at speciation**.
+
+::: {.callout-note}
+Biogeographic models are **substitution models with structure**: a CTMC over *ranges*
+instead of nucleotides, plus special **cladogenetic** events at nodes.
+:::
+
+# The DEC model {.center}
+
+## Dispersal–Extinction–Cladogenesis
+
+**DEC** [@ree2008] splits range evolution into two clocks:
+
+:::: {.columns}
+
+::: {.column width="54%"}
+**Anagenetic** (along branches, a CTMC):
+
+- **dispersal** rate $d$ (add an area),
+- **local extinction** rate $e$ (remove an area).
+
+**Cladogenetic** (at nodes): the ancestral range is partitioned between daughters —
+sympatry, **vicariance**, or **founder-event** ("jump") speciation.
+:::
+
+::: {.column width="46%"}
+::: {.figure-prompt}
+**FIGURE** — DEC schematic: a branch gaining/losing areas by dispersal/extinction, and a
+node showing vicariance vs. founder-event range inheritance.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Diagram of the DEC model showing anagenetic dispersal and local extinction along a branch and cladogenetic range splitting at a speciation node."
+  B) "Illustration of dispersal, local extinction, and cladogenetic range inheritance in historical biogeography."
+-->
+:::
+
+::::
+
+- Output: **ancestral ranges** at every node (where did the clade originate?).
+
+# GeoSSE {.center}
+
+## Geography can drive diversification
+
+**DEC treats range as a neutral trait** — geography doesn't change speciation/extinction.
+**GeoSSE** [@goldberg2011] relaxes that: being in a region **affects diversification**
+(a state-dependent model, like BiSSE but for geography).
+
+Four processes (here, two regions A and B):
+
+$$
+\underbrace{\rho_w}_{\text{within-region speciation}}\quad
+\underbrace{\rho_e}_{\text{(local) extinction}}\quad
+\underbrace{\rho_b}_{\text{between-region speciation}}\quad
+\underbrace{\rho_d}_{\text{dispersal}}
+$$
+
+- **Anagenetic** dispersal/extinction **plus** region-specific **speciation** and
+  **cladogenetic** range inheritance.
+
+## DEC vs. GeoSSE
+
+| | **DEC** | **GeoSSE** |
+|---|---|---|
+| Range is... | a neutral trait | a driver of diversification |
+| Estimates | ancestral ranges | ancestral ranges **+ rates** ($\lambda,\mu$ by region) |
+| Asks | *where* did lineages live? | does *where* change *how fast* they diversify? |
+| Caveat | ignores diversification | inherits SSE **false-positive** risks (deck 01) |
+
+::: {.callout-important}
+As with BiSSE, a GeoSSE "signal" can be an artifact of one radiating clade. Use **model
+comparison** (Bayes factors / marginal likelihoods) and interpret cautiously.
+:::
+
+## Ancestral ranges on a tree
+
+:::: {.columns}
+
+::: {.column width="52%"}
+- Fit the model by MCMC, then paint **ancestral states** on the tree (pie charts / colored
+  branches).
+- **Stochastic mapping** samples full histories, giving event counts (how many dispersals?
+  when?).
+- Model choice matters: founder-event ("+J") vs. classic DEC can change the story.
+:::
+
+::: {.column width="48%"}
+::: {.figure-prompt}
+**FIGURE** — ancestral-range reconstruction: tree with nodes colored by inferred region
+(old vs. young island), e.g. Hawaiian *Kadua*.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "A phylogeny with nodes and branches colored by inferred ancestral geographic region across two island areas."
+  B) "Ancestral-range estimate showing a plant radiation moving from older to younger islands."
+-->
+:::
+
+::::
+
+# Plants {.center}
+
+## Plant biogeography examples
+
+- **Island radiations** — the Hawaiian flora (e.g. *Kadua*, silverswords, lobeliads):
+  dispersal to the archipelago, then progression down the **island-age gradient**.
+- **Neotropical hyperdiversity** — orchid radiations (Pérez-Escobar et al. 2017, the
+  reading) linked to Andean uplift and biome shifts.
+- Vicariance vs. long-distance dispersal — a recurring debate resolved with these models.
+
+## Summary
+
+- Ranges = discrete areas; range evolves by **dispersal, extinction, cladogenesis**.
+- **DEC** models range as a neutral trait and estimates **ancestral ranges**.
+- **GeoSSE** lets **geography drive diversification** — powerful but SSE-caveated.
+- Interpret ancestral ranges with **model comparison** and stochastic mapping.
+- <span class="xref">→ practical: fit **GeoSSE** to Hawaiian *Kadua* in RevBayes.</span>
+
+# References {.center}
+
+::: {#refs}
+:::

@@ -1,0 +1,140 @@
+---
+title: "Selection & the sliding window — notebook"
+subtitle: "Population Genomics · PB 495/595 · msprime exercise (executable)"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-fold: false
+    code-tools: true
+    embed-resources: true
+jupyter: python3
+---
+
+::: {.callout-note}
+## How to use this notebook
+A **new** exercise reinforcing **deck 04** (linked selection) and **deck 05** (genome scans).
+We simulate a real **hard selective sweep**, then measure diversity and Tajima's $D$ in
+**sliding windows** to see — and *demystify* — the genome-scan signal.
+
+- **Run:** `quarto preview exercise4-selection-sliding-window.qmd` (needs `plantevo-popgen`).
+- **Handout:** `quarto render exercise4-selection-sliding-window.qmd` → `.html`.
+
+Uses `msprime.SweepGenicSelection` (a structured-coalescent hard sweep). Validated in the
+`plantevo-popgen` env (msprime 1.4.2).
+:::
+
+## Setup
+
+```{python}
+import msprime
+import numpy as np
+import matplotlib.pyplot as plt
+
+Ne, L, RECOMB, MU = 5000, 2e6, 1e-7, 1e-8
+NWIN = 40
+
+def sweep_ts(seed, s=0.1, Ne=Ne, L=L, recomb=RECOMB, mu=MU, n_diploid=25):
+    """Hard sweep of a beneficial allele at the center of the sequence."""
+    sweep = msprime.SweepGenicSelection(
+        position=L / 2, start_frequency=1 / (2 * Ne),
+        end_frequency=1 - 1 / (2 * Ne), s=s, dt=1e-6)
+    ts = msprime.sim_ancestry(
+        samples=n_diploid, population_size=Ne, sequence_length=L,
+        recombination_rate=recomb,
+        model=[sweep, msprime.StandardCoalescent()], random_seed=seed)
+    return msprime.sim_mutations(ts, rate=mu, random_seed=seed)
+
+def neutral_ts(seed, Ne=Ne, L=L, recomb=RECOMB, mu=MU, n_diploid=25):
+    ts = msprime.sim_ancestry(samples=n_diploid, population_size=Ne, sequence_length=L,
+                              recombination_rate=recomb, random_seed=seed)
+    return msprime.sim_mutations(ts, rate=mu, random_seed=seed)
+
+def windows(nwin, L=L):
+    return np.linspace(0, L, nwin + 1)
+
+def win_mid(nwin, L=L):
+    w = windows(nwin, L)
+    return (w[:-1] + w[1:]) / 2
+```
+
+## Exercise A — one sweep, one scan (it's noisy!)
+
+```{python}
+ts = sweep_ts(seed=2)
+w = windows(NWIN)
+pi_w = ts.diversity(windows=w)
+d_w  = ts.Tajimas_D(windows=w)
+
+fig, axes = plt.subplots(2, 1, figsize=(7, 6), sharex=True)
+axes[0].plot(win_mid(NWIN) / 1e6, pi_w, "-o", ms=3)
+axes[0].axvline(1.0, color="red", ls="--", lw=1, label="swept site")
+axes[0].set_ylabel(r"$\pi$"); axes[0].legend(); axes[0].set_title("Single sweep — one replicate")
+axes[1].plot(win_mid(NWIN) / 1e6, d_w, "-o", ms=3, color="C1")
+axes[1].axhline(0, color="grey", lw=0.8); axes[1].axvline(1.0, color="red", ls="--", lw=1)
+axes[1].set_ylabel("Tajima's $D$"); axes[1].set_xlabel("position (Mb)")
+plt.tight_layout(); plt.show()
+```
+
+> **Q.** Can you see the valley at the swept site (1 Mb)? How much does a *single* genome
+> bounce around? This is why real scans are hard to read from one dataset.
+
+## Exercise B — average many sweeps: the expected signature
+
+Averaging replicate sweeps reveals the clean **diversity valley** and the **negative
+Tajima's $D$** dip that linked selection predicts (deck 04).
+
+```{python}
+reps = [sweep_ts(seed=i + 1) for i in range(20)]       # ~5 s
+w = windows(NWIN)
+pi_stack = np.array([ts.diversity(windows=w) for ts in reps])
+d_stack  = np.array([ts.Tajimas_D(windows=w) for ts in reps])
+pi_bar, d_bar = pi_stack.mean(0), d_stack.mean(0)
+pi_neutral = 4 * Ne * MU
+
+fig, axes = plt.subplots(2, 1, figsize=(7, 6), sharex=True)
+axes[0].plot(win_mid(NWIN) / 1e6, pi_bar, "-o", ms=3)
+axes[0].axhline(pi_neutral, color="green", ls=":", label=r"neutral $4N_e\mu$")
+axes[0].axvline(1.0, color="red", ls="--", lw=1, label="swept site")
+axes[0].set_ylabel(r"mean $\pi$"); axes[0].legend(); axes[0].set_title("Mean over 20 sweeps")
+axes[1].plot(win_mid(NWIN) / 1e6, d_bar, "-o", ms=3, color="C1")
+axes[1].axhline(0, color="grey", lw=0.8); axes[1].axvline(1.0, color="red", ls="--", lw=1)
+axes[1].set_ylabel("mean Tajima's $D$"); axes[1].set_xlabel("position (Mb)")
+plt.tight_layout(); plt.show()
+
+print(f"center pi = {pi_bar[NWIN//2]:.2e}   edge pi = {(pi_bar[0]+pi_bar[-1])/2:.2e}")
+print(f"center D  = {d_bar[NWIN//2]:.2f}    edge D  = {(d_bar[0]+d_bar[-1])/2:.2f}")
+```
+
+> **Q.** How deep is the valley relative to the neutral line? Where is Tajima's $D$ most
+> negative? Recall the swept-region width scales like $s/c$ (deck 04) — predict how the
+> valley widens if you **raise $s$** or **lower recombination $c$**, then test it in the
+> helper.
+
+## Exercise C — demystifying the window size
+
+The scan is *a statistic + a window size + a null*. Re-bin the **same** simulations at
+different window counts and watch the signal appear and disappear.
+
+```{python}
+fig, ax = plt.subplots(figsize=(7, 4))
+for nwin in [8, 40, 200]:
+    w = windows(nwin)
+    pi_bar = np.array([ts.diversity(windows=w) for ts in reps]).mean(0)
+    ax.plot(win_mid(nwin) / 1e6, pi_bar / (4 * Ne * MU), "-", label=f"{nwin} windows")
+ax.axvline(1.0, color="red", ls="--", lw=1, label="swept site")
+ax.set_xlabel("position (Mb)"); ax.set_ylabel(r"$\pi$ / neutral")
+ax.set_title("Window size changes what you see"); ax.legend(); plt.show()
+```
+
+> **Q.** With **too few** windows the valley is washed out; with **too many** it's buried in
+> noise. Which window count best localizes the sweep here? How would you choose a window size
+> for a real dataset (hint: recombination rate and SNP density)?
+
+## Takeaways
+
+- Positive selection carves a **local diversity valley** with a **negative Tajima's $D$** —
+  the linked-selection signature from deck 04.
+- A single scan is noisy; the *expected* pattern emerges only across replicates (or across a
+  genome-wide null). **Genome-wide vs. local** is how you tell selection from demography.
+- Every scan choice — statistic, **window size**, null — changes which peaks you call.

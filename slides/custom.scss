@@ -1,0 +1,79 @@
+/*-- scss:defaults --*/
+// Light theme tweaks for the Population Genomics decks.
+// NCSU-ish palette: Wolfpack Red + supporting grays.
+
+$ncsu-red:   #CC0000;
+$ncsu-black: #000000;
+$ink:        #1a1a1a;
+$muted:      #6b6b6b;
+
+$body-color:            $ink;
+$link-color:            $ncsu-red;
+$selection-background-color: rgba($ncsu-red, 0.2);
+
+// Slightly smaller headings so equation-heavy slides fit.
+$presentation-heading-color: $ncsu-red;
+$presentation-heading-font-weight: 700;
+$presentation-h1-font-size: 1.9em;
+$presentation-h2-font-size: 1.4em;
+$presentation-font-size-root: 30px;
+
+/*-- scss:rules --*/
+
+// Section-divider slides (level-1 headers): red band, white text.
+.reveal .slide.level1 h1,
+.reveal section.has-dark-background h1 {
+  color: #ffffff;
+}
+
+// Make display equations a touch larger and give them breathing room.
+.reveal .slides section .MathJax,
+.reveal mjx-container[display="true"] {
+  font-size: 1.05em !important;
+  margin: 0.4em 0;
+}
+
+// Caption / source-credit text under figures.
+.reveal figcaption,
+.reveal .caption,
+.reveal .source {
+  font-size: 0.55em;
+  color: $muted;
+  font-style: italic;
+}
+
+// Helper for paired equation + figure layouts.
+.reveal .columns { align-items: center; }
+
+// Key-equation callout boxes stand out from prose.
+.reveal .callout { font-size: 0.85em; }
+
+// Tighten bullet lists on dense slides.
+.reveal .smaller-list ul { font-size: 0.8em; }
+
+// De-emphasize forward/back references to other lectures.
+.reveal .xref {
+  color: $muted;
+  font-size: 0.7em;
+  font-style: italic;
+}
+
+// Placeholder for a figure to be sourced/inserted later. Renders as an
+// obvious dashed "fill me in" box so empty figure slots are easy to spot.
+.reveal .figure-prompt {
+  border: 2px dashed $ncsu-red;
+  border-radius: 8px;
+  background: rgba($ncsu-red, 0.04);
+  color: $muted;
+  font-size: 0.7em;
+  font-style: italic;
+  text-align: center;
+  padding: 0.6em 0.8em;
+  margin: 0.4em auto;
+
+  strong {
+    color: $ncsu-red;
+    font-style: normal;
+    letter-spacing: 0.05em;
+  }
+}

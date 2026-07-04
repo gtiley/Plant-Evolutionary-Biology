@@ -1,0 +1,31 @@
+project:
+  type: default
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "popgen/*.qmd"
+    - "phylo/*.qmd"
+    - "macro/*.qmd"
+    - "!popgen/exercises/"   # standalone exercises/notebooks — render on their own
+    - "!phylo/exercises/"    # standalone RevBayes practicals
+    - "!macro/exercises/"
+
+# Shared metadata applied to every deck in the project.
+# Individual .qmd files can override any of these in their own front matter.
+author: "George P. Tiley"
+bibliography: references.bib
+
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: c/t          # current/total in the corner
+    chalkboard: true           # press 'b' in class to draw on slides
+    incremental: false         # turn on per-slide with {.incremental}
+    html-math-method: mathjax  # full LaTeX rendering for derivations
+    width: 1280
+    height: 720
+    fig-align: center
+    footer: "PB 495/595 · Plant Evolutionary Biology · Population Genomics"
+    link-external-newwindow: true
+    code-line-numbers: true
+    smaller: false

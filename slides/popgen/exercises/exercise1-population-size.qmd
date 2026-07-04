@@ -1,0 +1,118 @@
+---
+title: "Population size & diversity — notebook version"
+subtitle: "Population Genomics · PB 495/595 · msprime exercise (executable)"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-fold: false
+    code-tools: true
+    embed-resources: true   # single self-contained .html to hand out
+jupyter: python3
+---
+
+::: {.callout-note}
+## How to use this notebook
+This is the **executable** counterpart to
+[`exercise1-population-size.md`](exercise1-population-size.md): same content, but the code
+runs and the figures appear inline.
+
+- **Preview / run:** `quarto preview exercise1-population-size.qmd` (needs the
+  `plantevo-popgen` conda env).
+- **Render to a self-contained handout:** `quarto render exercise1-population-size.qmd` → one
+  `.html`.
+- **Prefer Jupyter?** `quarto convert exercise1-population-size.qmd` → `.ipynb`.
+
+The explicit `format: html` in the header overrides the project's revealjs default, so this
+renders as a document, not slides. Validated in the `plantevo-popgen` env (msprime 1.4.2).
+:::
+
+## Setup
+
+```{python}
+import msprime
+import numpy as np
+import matplotlib.pyplot as plt
+
+RNG = 42
+
+def harmonic(n):
+    "a_n = sum_{i=1}^{n-1} 1/i"
+    return np.sum(1.0 / np.arange(1, n))
+
+def simulate(Ne, mu=1e-8, L=1e6, n_diploid=25, recomb=1e-8, demography=None, seed=RNG):
+    kw = dict(sequence_length=L, recombination_rate=recomb, random_seed=seed)
+    if demography is None:
+        ts = msprime.sim_ancestry(samples=n_diploid, population_size=Ne, **kw)
+    else:
+        ts = msprime.sim_ancestry(samples=n_diploid, demography=demography, **kw)
+    ts = msprime.sim_mutations(ts, rate=mu, random_seed=seed)
+    n = ts.num_samples
+    S = ts.segregating_sites(span_normalise=False)
+    return ts, {
+        "pi": ts.diversity(),
+        "theta_w": (S / harmonic(n)) / ts.sequence_length,
+        "tajimas_d": ts.Tajimas_D(),
+        "seg_sites": int(S),
+    }
+
+def sfs_counts(ts):
+    return ts.allele_frequency_spectrum(polarised=True, span_normalise=False)[1:-1]
+```
+
+## Exercise A — diversity scales with $N_e$
+
+The coalescent prediction is $\pi \approx 4N_e\mu$. Simulate across a grid and overlay the
+theory line.
+
+```{python}
+mu = 1e-8
+Ne_grid = [500, 1000, 2000, 5000, 10000, 20000]
+pis = [simulate(Ne, mu=mu)[1]["pi"] for Ne in Ne_grid]
+
+fig, ax = plt.subplots(figsize=(5, 4))
+ax.plot(Ne_grid, pis, "o-", label=r"$\pi$ (measured)")
+ax.plot(Ne_grid, [4 * Ne * mu for Ne in Ne_grid], "k--", label=r"$4N_e\mu$ (theory)")
+ax.set_xlabel(r"effective size $N_e$"); ax.set_ylabel(r"diversity $\pi$")
+ax.set_title("Diversity scales with $N_e$"); ax.legend()
+plt.show()
+```
+
+> **Q.** Where does the single-replicate estimate stray from the line, and why? Add several
+> seeds and error bars.
+
+## Exercise B — population-size change reshapes the SFS
+
+```{python}
+Ne = 10000
+
+exp_dem = msprime.Demography()             # expansion: small past -> large now
+exp_dem.add_population(name="A", initial_size=Ne)
+exp_dem.add_population_parameters_change(time=2000, initial_size=Ne / 20, population="A")
+
+bot_dem = msprime.Demography()             # transient bottleneck
+bot_dem.add_population(name="A", initial_size=Ne)
+bot_dem.add_population_parameters_change(time=1000, initial_size=Ne / 50, population="A")
+bot_dem.add_population_parameters_change(time=1500, initial_size=Ne, population="A")
+
+fig, axes = plt.subplots(1, 3, figsize=(13, 4))
+for ax, (label, dem) in zip(axes, [("constant", None), ("expansion", exp_dem),
+                                    ("bottleneck", bot_dem)]):
+    ts, s = simulate(Ne, mu=mu, demography=dem)
+    counts = sfs_counts(ts)
+    ax.bar(np.arange(1, len(counts) + 1), counts, color="#4477AA")
+    ax.set_xlabel("derived-allele count"); ax.set_ylabel("sites")
+    ax.set_title(f"{label}\nTajima's D = {s['tajimas_d']:.2f}")
+plt.tight_layout(); plt.show()
+```
+
+> **Q.** Which scenario skews the SFS toward **rare** variants (Tajima's $D<0$) and which
+> toward **intermediate** ($D>0$)? Why does demography shift the SFS *genome-wide* while
+> selection shifts it only *locally*?
+
+## Takeaways
+
+- $\pi$ tracks **effective** size, not census size.
+- The **shape** of the SFS — not just $\pi$ — records population-size history.
+- This is the genome-wide background against which the selection scans (decks 04–05) hunt
+  for *local* outliers.

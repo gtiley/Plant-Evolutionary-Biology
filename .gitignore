@@ -1,3 +1,17 @@
 .DS_Store
 /_site
 /tests
+
+# Quarto slide build artifacts
+/slides/_site
+/slides/.quarto
+/slides/popgen/*_files
+
+# Standalone exercise / notebook / practical render artifacts
+/slides/popgen/exercises/*.html
+/slides/popgen/exercises/*_files
+/slides/popgen/exercises/*.quarto_ipynb
+/slides/phylo/exercises/*.html
+/slides/phylo/exercises/*_files
+/slides/macro/exercises/*.html
+/slides/macro/exercises/*_files

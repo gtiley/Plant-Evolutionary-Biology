@@ -1,0 +1,284 @@
+---
+title: "Population Structure"
+subtitle: "Population Genomics · PB 495/595 Plant Evolutionary Biology"
+author: "George P. Tiley"
+date: "2026-08-27"
+date-format: "D MMMM YYYY"
+---
+
+## Where we are
+
+- **Last time:** allele frequencies, Hardy–Weinberg, and how much diversity ($H$, $\pi$,
+  $\theta$) a population holds.
+- HW assumed **random mating**. Real plants rarely oblige — they mate with neighbors,
+  self, and sit in geographically structured populations.
+- **Today:** how do we *quantify* departures from panmixia, and how do they pattern
+  variation **within vs. among** populations?
+
+::: {.notes}
+The through-line: structure is the first thing you characterize in any population-genomic
+dataset, because almost every downstream analysis (GWAS, selection scans, demography) is
+confounded by it.
+:::
+
+## Learning objectives
+
+By the end you should be able to:
+
+- Explain why "inbred" only means something **relative to a reference population**.
+- Derive Wright's **$F_{IS}$, $F_{IT}$, $F_{ST}$** and the identity linking them.
+- Use the **Wahlund effect** to explain heterozygote deficits in pooled samples.
+- Define **linkage disequilibrium** $D$ and explain how structure generates it.
+- Read a **PCA** and an **ADMIXTURE** plot.
+
+# Inbreeding is relative {.center}
+
+## Whose allele frequencies? The reference-population problem
+
+- "Inbreeding" = parents more related than two individuals drawn at random... **from
+  which population?**
+- A plant may look outbred relative to its **local patch**, yet inbred relative to the
+  **whole species**, because allele frequencies differ among patches.
+- Wright's insight: define inbreeding at **nested levels** — individual ($I$),
+  subpopulation ($S$), total ($T$) — and compare.
+
+::: {.callout-note}
+Population structure and inbreeding are the **same phenomenon** measured against different
+reference sets. That is what the $F$-statistics formalize.
+:::
+
+## Wright's F-statistics: a hierarchy
+
+:::: {.columns}
+
+::: {.column width="55%"}
+$F_{XY}$ = the correlation between random gametes drawn at level $X$, relative to level
+$Y$. The three classic comparisons:
+
+- $F_{IS}$ — individual vs. subpopulation
+- $F_{IT}$ — individual vs. total
+- $F_{ST}$ — subpopulation vs. total
+:::
+
+::: {.column width="45%"}
+::: {.figure-prompt}
+**FIGURE** — F-statistics hierarchy schematic (Coop, Fig 3.1): two alleles within an
+individual nested in $S$ nested in $T$, with $H_I$, $H_S$, $H_T$ labeled.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Nested diagram showing two alleles inside an individual, the individual inside a subpopulation, and the subpopulation inside the total population, labeled with heterozygosities H_I, H_S, H_T."
+  B) "Schematic of the hierarchical levels at which inbreeding is measured: individual, subpopulation, and total population."
+-->
+:::
+
+::::
+
+## $F_{IS}$, $F_{IT}$ — observed vs. expected heterozygosity
+
+Let $H_I = f_{12}$ be the **observed** heterozygosity, and within subpopulation $S$ (allele
+frequency $p_S$) the HW expectation is $H_S = 2p_S q_S$.
+
+$$
+F_{IS} = 1 - \frac{H_I}{H_S} = 1 - \frac{f_{12}}{2 p_S q_S}.
+$$
+
+Comparing the individual instead to the **total** population ($p_T$):
+
+$$
+F_{IT} = 1 - \frac{H_I}{H_T} = 1 - \frac{f_{12}}{2 p_T q_T}.
+$$
+
+- $F_{IS} > 0$: heterozygote deficit **within** a deme (selfing, assortative mating).
+
+## $F_{ST}$ and the decomposition
+
+Compare expected heterozygosity in the subpopulation to that in the total:
+
+$$
+F_{ST} = 1 - \frac{H_S}{H_T} = 1 - \frac{2 p_S q_S}{2 p_T q_T}.
+$$
+
+The three statistics multiply through the nested heterozygosities:
+
+$$
+(1 - F_{IT}) = \frac{H_I}{H_S}\cdot\frac{H_S}{H_T} = (1 - F_{IS})(1 - F_{ST}).
+$$
+
+::: {.callout-important}
+$F_{ST}$ isolates the part of the heterozygosity deficit due to **differences among
+populations** — the workhorse measure of differentiation.
+:::
+
+## Worked example — a selfing herb
+
+A **selfing** herb sampled within one meadow ($S$) and range-wide ($T$):
+
+$$
+p_S = 0.10,\quad f_{12} = 0.09,\quad p_T = 0.20.
+$$
+
+. . .
+
+$$
+\begin{aligned}
+F_{IS} &= 1 - \frac{0.09}{2(0.1)(0.9)} = 1 - \frac{0.09}{0.18} = 0.50 \\[4pt]
+F_{ST} &= 1 - \frac{2(0.1)(0.9)}{2(0.2)(0.8)} = 1 - \frac{0.18}{0.32} = 0.44 \\[4pt]
+F_{IT} &= 1 - (1-0.50)(1-0.44) = 1 - 0.28 = 0.72 .
+\end{aligned}
+$$
+
+- High $F_{IS}$ (selfing) **and** high $F_{ST}$ (differentiated meadows) compound.
+
+## The Wahlund effect
+
+Average over $K$ subpopulations sampled equally:
+
+$$
+\bar F_{ST} = 1 - \frac{\bar H_S}{H_T},\qquad
+\bar H_S = \frac{1}{K}\sum_{i=1}^{K} 2 p_i q_i .
+$$
+
+Because the average of $2p_iq_i$ is **always** $\leq 2\bar p\,\bar q$, pooling demes
+**deficits heterozygotes** even if every deme is in perfect HW:
+
+::: {.figure-prompt}
+**FIGURE** — Wahlund effect: two demes each in HW at different allele frequencies; the
+pooled sample shows a heterozygote deficit vs. its HW expectation.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Bar charts of genotype frequencies for two demes in Hardy–Weinberg equilibrium and their pooled sample, where pooling produces fewer heterozygotes than expected."
+  B) "Illustration that merging two differentiated but randomly mating populations creates an apparent excess of homozygotes."
+-->
+
+## $F_{ST}$ in practice: genome-wide vs. per-locus
+
+- Report a **genome-wide** $F_{ST}$ as the differentiation baseline; scan **per-locus**
+  $F_{ST}$ for **outliers** (candidate targets of divergent selection — deck 05).
+- Average heterozygosities across loci **before** taking the ratio (better statistical
+  behavior than averaging per-locus $F_{ST}$).
+
+::: {.figure-prompt}
+**FIGURE** — Manhattan plot of per-SNP $F_{ST}$ along a chromosome with the genome-wide
+mean line and a few outlier peaks.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Per-SNP F_ST plotted along genomic position, mostly low with a few tall peaks rising above the genome-wide average line."
+  B) "Genome scan showing most loci weakly differentiated between populations and a handful of strongly differentiated outlier regions."
+-->
+
+# Correlations among loci {.center}
+
+## Linkage disequilibrium
+
+So far: correlations between alleles at **one** locus. Now between **different** loci.
+For biallelic loci $A/a$ and $B/b$ with haplotype frequency $p_{AB}$:
+
+$$
+D = p_{AB} - p_A p_B, \qquad p_{AB} = p_A p_B + D .
+$$
+
+- $D = 0$: **linkage equilibrium** (statistical independence).
+- $D \neq 0$: alleles are correlated. Normalize for comparability:
+
+$$
+r^2 = \frac{D^2}{p_A q_A\, p_B q_B}.
+$$
+
+::: {.callout-note}
+**Linkage** (co-transmission on a chromosome) and **linkage disequilibrium** (a
+correlation) are different things — unlinked loci can be in LD.
+:::
+
+## Structure generates LD
+
+- Recombination **erodes** $D$ each generation: $D_{t+1} = (1-c)\,D_t$.
+- But mixing differentiated populations **creates** LD even between unlinked loci — the
+  same Wahlund logic, one locus over.
+- ⟹ admixture, selfing, and bottlenecks all inflate genome-wide LD.
+
+<span class="xref">→ LD decay underlies association mapping and GEA (deck 05) and is reshaped
+by selfing (deck 03).</span>
+
+# Visualizing structure {.center}
+
+## Principal component analysis (PCA)
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Decompose the centered genotype matrix; the leading PCs are **axes of greatest allele-
+  frequency variation** — usually geography/ancestry.
+- Model-free, fast, no assumed $K$.
+- Caveat: PCs reflect sampling and can be distorted by relatedness and uneven sample sizes.
+:::
+
+::: {.column width="50%"}
+::: {.figure-prompt}
+**FIGURE** — PCA scatter of *Arabidopsis thaliana* (1001 Genomes): PC1 vs PC2, points
+colored by geographic origin.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Scatter plot of individuals on the first two principal components of genome-wide genotypes, forming clusters colored by geographic region."
+  B) "PCA showing that genetic variation in Arabidopsis thaliana mirrors geography along the first two principal components."
+-->
+:::
+
+::::
+
+## Model-based clustering (STRUCTURE / ADMIXTURE)
+
+- Assign each individual fractional ancestry to $K$ clusters; the familiar **stacked-bar**
+  plot.
+- Must **choose $K$**; results are a model summary, not ground truth — different $K$ tell
+  different stories.
+
+::: {.figure-prompt}
+**FIGURE** — ADMIXTURE barplot: each individual a vertical bar of ancestry proportions
+across $K$ colored clusters, grouped by population.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Stacked bar plot where each individual is one bar partitioned into colored segments showing estimated ancestry proportions across K clusters."
+  B) "Model-based ancestry plot showing individuals assigned to a small number of genetic clusters that largely correspond to sampling locations."
+-->
+
+::: {.callout-tip}
+Well-studied plant systems for this: *A. thaliana* global structure [@onethousandone2016arabidopsis]
+and the maize–teosinte continuum.
+:::
+
+## Summary — key equations
+
+$$
+F_{IS} = 1 - \frac{H_I}{H_S}
+\qquad
+F_{ST} = 1 - \frac{H_S}{H_T}
+\qquad
+(1-F_{IT}) = (1-F_{IS})(1-F_{ST})
+$$
+
+$$
+\bar F_{ST} = 1 - \frac{\bar H_S}{H_T}
+\qquad
+D = p_{AB} - p_A p_B
+\qquad
+r^2 = \frac{D^2}{p_Aq_A\,p_Bq_B}
+$$
+
+- Inbreeding and structure are one phenomenon at **different reference levels**.
+- Pooling differentiated demes deficits heterozygotes (**Wahlund**) and builds **LD**.
+- PCA and ADMIXTURE **describe** structure; $F_{ST}$ and $D$ **quantify** it.
+
+# References {.center}
+
+::: {#refs}
+:::

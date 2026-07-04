@@ -1,0 +1,568 @@
+---
+title: "Genetic Diversity"
+subtitle: "Population Genomics · PB 495/595 Plant Evolutionary Biology"
+author: "George P. Tiley"
+date: "2026-08-25"
+date-format: "D MMMM YYYY"
+---
+
+## Where we are
+
+- **Last time:** random variables, probability, stochastic processes.
+- **Today:** how do we *describe* and *measure* genetic variation in a population?
+- **The thread for this module:** a handful of summary statistics ($H$, $\pi$, $\theta$)
+  let us read population size, mutation, mating system, and selection off of
+  sequence data.
+
+::: {.notes}
+Anchor the module: everything in population genomics is built on counting alleles and
+asking whether what we see departs from a simple neutral, random-mating null. Today we
+build that null and the statistics that summarize it.
+:::
+
+## Learning objectives
+
+By the end you should be able to:
+
+- Define **locus, allele, polymorphism**, and the difference between
+  *ancestral/derived* and *minor/major* alleles.
+- Compute **allele frequencies** from genotype counts.
+- Derive the **Hardy–Weinberg** genotype proportions and state the assumptions.
+- Define and compute **expected heterozygosity $H$** and **nucleotide diversity $\pi$**.
+- Connect diversity to $N_e$ and $\mu$ through **drift** and the **coalescent**,
+  and compute **Watterson's $\theta_W$**.
+
+# The basic currency: loci and alleles {.center}
+
+## Loci, alleles, and polymorphism
+
+:::: {.columns}
+
+::: {.column width="55%"}
+- A **locus** is a position in the genome — a whole gene or a single base pair.
+- The variants segregating at a locus are **alleles**.
+- A locus with one allele is **monomorphic**; with $\geq 2$ alleles it is
+  **polymorphic** (a *segregating site*).
+
+We annotate the two alleles in two distinct ways:
+
+- **Minor / major** — by *frequency* (less vs. more common in the sample).
+- **Ancestral / derived** — by *age*, inferred from an outgroup.
+:::
+
+::: {.column width="45%"}
+::: {.figure-prompt}
+**FIGURE** — *Drosophila* ADH alignment excerpt (Coop, Table 2.1): a few haplotypes ×
+sites, highlighting a segregating site (e.g. 834) vs. a fixed difference (e.g. 781), with
+*D. yakuba* as outgroup.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Sequence alignment of several Drosophila ADH haplotypes across variable sites, with one column marked as polymorphic within a species and another marked as a fixed difference between species."
+  B) "ADH alignment showing how a within-species polymorphism differs from a between-species fixed difference, polarized using an outgroup."
+-->
+:::
+
+::::
+
+::: {.callout-note}
+## Worked example (Coop, Table 2.1)
+In the *Drosophila* **ADH** alignment, site 834 is a polymorphism within
+*D. simulans*; site 781 is a **fixed difference** between *D. melanogaster* and the
+others. The derived allele is identified using *D. yakuba* as outgroup.
+:::
+
+## From genotypes to allele frequencies
+
+We observe **genotype counts**, not alleles directly. For a diploid locus with
+alleles $A_1, A_2$ in $N$ individuals, let $N_{11}, N_{12}, N_{22}$ be the counts of
+$A_1A_1$, $A_1A_2$, $A_2A_2$. Define genotype frequencies $f_{ij} = N_{ij}/N$.
+
+Count $A_1$ alleles — each homozygote carries two, each heterozygote one:
+
+$$
+\begin{aligned}
+p = \mathrm{freq}(A_1)
+  &= \frac{2N_{11} + N_{12}}{2N} \\[4pt]
+  &= f_{11} + \tfrac{1}{2} f_{12}, \qquad q = 1 - p .
+\end{aligned}
+$$
+
+::: {.callout-important}
+This is just bookkeeping — it holds **regardless** of Hardy–Weinberg, mating system,
+or selection. Allele frequencies are always recoverable from genotype counts.
+:::
+
+# Hardy–Weinberg {.center}
+
+## Hardy–Weinberg — the random-mating null {.incremental}
+
+Assume **random union of gametes**: no inbreeding, no assortative mating, no structure,
+no allele-frequency differences between sexes. Let $\mathrm{freq}(A_1) = p$.
+
+- A zygote draws two gametes *independently* from the gamete pool.
+- $\Pr(A_1A_1) = p \times p = p^2$.
+- $\Pr(A_2A_2) = q^2$.
+- $\Pr(A_1A_2) = pq + qp = 2pq$ (two ways to get the heterozygote).
+
+## Hardy–Weinberg proportions
+
+$$
+\begin{array}{c|ccc}
+\text{genotype} & A_1A_1 & A_1A_2 & A_2A_2 \\ \hline
+\text{frequency} & p^2 & 2pq & q^2
+\end{array}
+$$
+
+- Reached in **one generation** of random mating; an **equilibrium** as long as there is
+  no migration, selection, or mutation changing $p$.
+- Selection can change $p$ *within* a generation, but the **new zygotes** still follow
+  $p^2 : 2pq : q^2$ at the current $p$.
+
+::: {.figure-prompt}
+**FIGURE** — HapMap CEU/YRI Hardy–Weinberg demonstration (Coop, Fig 2.6): observed
+genotype frequencies vs. allele frequency for thousands of SNPs, with the $p^2$, $2pq$,
+$q^2$ curves overlaid.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Scatter of genotype frequencies against allele frequency for thousands of human SNPs, with three colored point clouds tracking the Hardy–Weinberg p-squared, 2pq, and q-squared curves."
+  B) "Empirical demonstration that real human SNP genotype frequencies fall close to the Hardy–Weinberg expectation across the full range of allele frequencies."
+-->
+
+::: {.notes}
+Stress that HW is about zygote formation. It "works" surprisingly well in real data
+(HapMap CEU/YRI demonstration in Coop, Fig 2.6) because individuals do not mate at random
+overall, but they *do* mate at random with respect to genotype at most loci.
+:::
+
+## Hardy–Weinberg — worked example
+
+**Kermode ("spirit") bears** — white morph is $GG$ at *MC1R*; sample of 87 bears:
+
+$$
+AA = 42, \quad AG = 24, \quad GG = 21
+$$
+
+. . .
+
+$$
+p = \mathrm{freq}(G) = \frac{2(21) + 24}{2(87)} = \frac{66}{174} = 0.38
+$$
+
+. . .
+
+Expected under HW: $\;GG = p^2 = 0.144,\;\; AG = 2pq = 0.471,\;\; AA = q^2 = 0.385$.
+
+::: {.callout-tip}
+Compare observed ($21/87 = 0.24$ are $GG$) to expected ($0.144$): an **excess of
+homozygotes** is the signature we will formalize next time as $F_{IS}$.
+:::
+
+# Measuring diversity {.center}
+
+## Expected heterozygosity $H$
+
+The probability that two alleles drawn at random are **different**:
+
+$$
+H = 2pq = 1 - p^2 - q^2 .
+$$
+
+For a multi-allelic locus with allele frequencies $p_1, p_2, \dots, p_k$:
+
+$$
+H = 1 - \sum_{i=1}^{k} p_i^2 , \qquad
+\text{homozygosity} = \sum_{i=1}^{k} p_i^2 = 1 - H .
+$$
+
+- $H$ is also called **gene diversity**; it is maximized at intermediate frequencies.
+- Foundational: drift, $F$-statistics, and $\pi$ are all built on $H$.
+
+## Nucleotide diversity $\pi$
+
+:::: {.columns}
+
+::: {.column width="55%"}
+The **average number of pairwise differences** between sequences in a sample of $n$
+haplotypes:
+
+$$
+\pi = \frac{1}{\binom{n}{2}} \sum_{i < j} d_{ij},
+$$
+
+where $d_{ij}$ = number of sites differing between haplotypes $i$ and $j$.
+:::
+
+::: {.column width="45%"}
+::: {.figure-prompt}
+**FIGURE** — small alignment cartoon: a handful of haplotypes with mismatched columns
+highlighted, arrows showing one pair being compared and its $d_{ij}$ counted.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Cartoon alignment of a few short sequences with differing sites highlighted, illustrating the count of pairwise differences between one selected pair."
+  B) "Schematic showing how nucleotide diversity averages the number of differing sites over all pairs of sampled sequences."
+-->
+:::
+
+::::
+
+::: {.callout-note}
+## Worked example — ADH in *D. simulans* (Coop)
+With $n = 6$ sequences there are $\binom{6}{2} = 15$ pairs:
+$$
+\pi = \tfrac{1}{15}\big[(2{+}1{+}1{+}1{+}0) + (3{+}3{+}3{+}2) + (0{+}0{+}1) + (0{+}1) + (1)\big] = 1.26 .
+$$
+Over 397 bp this is $\pi = 1.26 / 397 = 0.0032$ **per site**.
+:::
+
+- Always normalize **per site**; report synonymous vs. non-synonymous $\pi$ separately.
+
+## The (allele) frequency spectrum
+
+Tabulate how many sites have a variant present $i$ times out of $n$:
+
+- **Singletons** ($i = 1$) are the most numerous class under neutrality.
+- **Folded** spectrum: by *minor*-allele count (no outgroup needed).
+- **Unfolded** spectrum: by *derived*-allele count (needs an outgroup to polarize).
+
+::: {.figure-prompt}
+**FIGURE** — site frequency spectrum bar chart: derived-allele count on the x-axis, number
+of sites on the y-axis, showing the neutral $\propto 1/i$ decline; optionally a folded vs.
+unfolded pair.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Bar chart of the site frequency spectrum: site counts decrease as derived-allele frequency increases, with singletons the tallest bar."
+  B) "Site frequency spectrum showing the neutral expectation that rare variants greatly outnumber common ones."
+-->
+
+. . .
+
+::: {.callout-note}
+The *shape* of the spectrum — not just its average $\pi$ — carries information about
+demography and selection.
+<span class="xref">→ we exploit this on Sep 8 (Tajima's $D$, the SFS).</span>
+:::
+
+# Why is there diversity at all? Drift, mutation, the coalescent {.center}
+
+## Genetic drift erodes heterozygosity
+
+Diversity is a balance between **mutation** (adds variation) and **drift** (removes it).
+In a finite population of $N$ diploids ($2N$ gene copies), sampling each generation gives:
+
+:::: {.columns}
+
+::: {.column width="55%"}
+$$
+\begin{aligned}
+H_{t} &= H_{t-1}\left(1 - \frac{1}{2N}\right) \\[4pt]
+\Rightarrow\quad H_{t} &= H_{0}\left(1 - \frac{1}{2N}\right)^{t}
+       \;\approx\; H_{0}\, e^{-t/(2N)} .
+\end{aligned}
+$$
+
+- Two gene copies have a chance $1/2N$ of sharing a parent (becoming identical) each
+  generation, so heterozygosity decays at rate $1/2N$.
+- Smaller $N$ ⟹ faster loss of diversity.
+:::
+
+::: {.column width="45%"}
+::: {.figure-prompt}
+**FIGURE** — simulated allele-frequency trajectories over generations for a few values of
+$N$, showing faster drift to fixation/loss in smaller populations.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Line plot of allele frequency over generations for several replicate populations, with small-N populations wandering to fixation or loss faster than large-N ones."
+  B) "Simulated genetic drift showing allele frequencies drifting toward zero or one more rapidly when population size is small."
+-->
+:::
+
+::::
+
+## The coalescent for a pair of lineages
+
+:::: {.columns}
+
+::: {.column width="55%"}
+Trace two sampled gene copies **backwards**. Each generation they coalesce (share a
+parent) with probability $1/2N$, otherwise they continue:
+
+$$
+\Pr(T_2 = t + 1) = \left(1 - \frac{1}{2N}\right)^{t}\frac{1}{2N} .
+$$
+
+This is a **geometric** distribution, so the expected time to coalescence is
+
+$$
+\mathbb{E}[T_2] = 2N \ \text{generations}.
+$$
+:::
+
+::: {.column width="45%"}
+::: {.figure-prompt}
+**FIGURE** — coalescent genealogy cartoon (Coop, Fig 4.15): two present-day lineages
+traced back through a Wright–Fisher population to their MRCA at time $T_2$.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Cartoon of a Wright–Fisher population over several generations with two sampled lineages traced backward until they merge at a most recent common ancestor."
+  B) "Genealogy showing two gene copies coalescing into a single ancestral lineage some number of generations in the past."
+-->
+:::
+
+::::
+
+::: {.notes}
+"Life can only be understood backwards." The coalescent reframes diversity as: how long
+ago did this pair share an ancestor? Longer shared-ancestor times = more time to
+accumulate mutations = more diversity.
+:::
+
+## Mutation on the coalescent ⟹ $\theta$
+
+Neutral mutations don't alter genealogies, so layer mutation on top. Mutations arise at
+rate $\mu$ per copy per generation; over the **two** lineages back to their common
+ancestor, the number of differences is Poisson with mean $2\mu T_2$:
+
+$$
+\mathbb{E}[\pi] = \mathbb{E}[\,2\mu T_2\,] = 2\mu \cdot \mathbb{E}[T_2]
+              = 2\mu (2N) = 4N\mu \equiv \theta .
+$$
+
+::: {.callout-important}
+## The scaled mutation parameter
+$$ \theta = 4N_e \mu $$
+Expected pairwise diversity is set by the product of **population size** and
+**mutation rate**. This single quantity recurs throughout the module.
+:::
+
+## Worked example — estimating $N_e$
+
+Split-gill fungus *Schizophyllum commune*: $\pi = 0.13$ per synonymous site,
+$\mu = 2\times 10^{-8}$ per bp per generation (Baranova et al. 2015).
+
+$$
+\pi = 4 N_e \mu \;\Rightarrow\;
+N_e = \frac{\pi}{4\mu} = \frac{0.13}{4 \times 2\times 10^{-8}} \approx 1.6 \times 10^{6}.
+$$
+
+- One of the highest diversities known in any eukaryote.
+- Inverting $\pi = 4N_e\mu$ is the basic way we read $N_e$ off sequence data.
+
+# What is $N_e$? {.center}
+
+## The effective population size
+
+We keep writing $N_e$, not the census count $N$. **$N_e$ is the size of an idealized
+Wright–Fisher population that drifts (or inbreeds) at the same rate as the real one.**
+
+$$
+\text{rate of drift} = \frac{1}{2N_e},\qquad
+\text{a new mutation starts at } \frac{1}{2N_e}.
+$$
+
+- Real populations almost always have $N_e < N$ — sometimes by orders of magnitude.
+- $N_e$, not $N$, sets diversity ($\theta=4N_e\mu$), the strength of drift, and the
+  efficacy of selection.
+
+## What makes $N_e < N$
+
+:::: {.columns}
+
+::: {.column width="58%"}
+- **Unequal sex ratio** (e.g. few pollen donors): $\;N_e = \dfrac{4 N_m N_f}{N_m + N_f}$.
+- **Variance in reproductive success** — a few individuals parent most seed ⟹ $N_e$ falls
+  below $N$.
+- **Fluctuating size over generations** — $N_e$ is the **harmonic mean**, so a single
+  bottleneck dominates: $\;\dfrac{1}{N_e}=\dfrac{1}{t}\sum_{i=1}^{t}\dfrac{1}{N_i}$.
+- **Mating system** — selfing/clonality roughly **halve** $N_e$ and reduce effective
+  recombination.
+:::
+
+::: {.column width="42%"}
+::: {.figure-prompt}
+**FIGURE** — harmonic-mean intuition: census size fluctuating across generations with a
+deep bottleneck, $N_e$ tracking the low point rather than the average.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Plot of census population size over generations with a sharp bottleneck, and a line showing effective size pulled down toward the bottleneck value."
+  B) "Illustration that effective population size is dominated by the smallest generation, not the average census size."
+-->
+:::
+
+::::
+
+::: {.callout-important}
+Plant-relevant: bottlenecks (colonization, domestication), selfing, and clonal patches all
+**depress $N_e$** — so plant diversity often reflects history and life history, not current
+abundance.
+:::
+
+## Simulating drift — Wright–Fisher in R
+
+Drift is just **binomial sampling** of $2N$ gene copies each generation:
+$\;\mathbb E[p_{t+1}]=p_t,\;\; \mathrm{Var}(p_{t+1})=\dfrac{p_t q_t}{2N}.$
+
+```r
+# One Wright–Fisher trajectory: N diploids, A1 copies of the focal allele, t generations
+wright_fisher <- function(N = 1000, A1 = 100, t = 1000) {
+  p <- A1 / (2 * N)
+  freq <- numeric(t)
+  for (i in seq_len(t)) {
+    A1 <- rbinom(1, size = 2 * N, prob = p)  # sample next generation
+    p  <- A1 / (2 * N)
+    freq[i] <- p
+  }
+  freq
+}
+```
+
+::: {.notes}
+Adapted from J. Yang's AGRO-932 Wright–Fisher lab. Display-only here; to run live, change
+```` ```r ```` to ```` ```{r} ```` (needs the knitr engine).
+:::
+
+## Drift in action — many replicates
+
+```r
+set.seed(1234)
+plot(wright_fisher(), type = "l", ylim = c(0, 1),
+     xlab = "Generations", ylab = expression(p(A[1])))
+for (u in 1:100) lines(wright_fisher(), col = sample(colours(), 1))
+```
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Each run wanders to **fixation (1)** or **loss (0)** — diversity is steadily destroyed.
+- **Smaller $N$** ⟹ faster, wider scatter; **larger $N$** ⟹ slower drift.
+:::
+
+::: {.column width="50%"}
+::: {.figure-prompt}
+**FIGURE** — output of the loop: ~100 allele-frequency trajectories from $p_0=0.05$,
+spreading toward 0 and 1 over generations.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Many simulated allele-frequency trajectories starting at the same value and diverging over generations, with most reaching fixation or loss."
+  B) "Wright–Fisher simulation showing genetic drift carrying replicate populations to fixation or loss at a rate set by population size."
+-->
+:::
+
+::::
+
+## A second estimator: Watterson's $\theta_W$
+
+Use the **number of segregating sites** $S$ instead of pairwise differences. For a sample
+of $n$ sequences, the genealogy has expected total branch length
+$\,\mathbb{E}[L] = 2N \, a_n\,$ with $a_n = \sum_{i=1}^{n-1} \tfrac{1}{i}$, so:
+
+$$
+\begin{aligned}
+\mathbb{E}[S] &= \mu\,\mathbb{E}[L] = \theta\, a_n,
+\qquad a_n = \sum_{i=1}^{n-1}\frac{1}{i} \\[4pt]
+\Rightarrow\quad \hat{\theta}_W &= \frac{S}{a_n}.
+\end{aligned}
+$$
+
+- $\pi$ and $\theta_W$ **both** estimate $\theta$ under neutrality + constant size.
+- They weight the data differently: $\pi$ favors intermediate-frequency variants,
+  $\theta_W$ counts every segregating site equally.
+
+## $\pi$ vs. $\theta_W$: a preview of things to come
+
+When the two estimators **disagree**, the null (neutral, constant-size) is violated:
+
+- $\pi < \theta_W$ → excess of rare variants (population growth, or purifying/positive
+  selection).
+- $\pi > \theta_W$ → excess of intermediate variants (bottleneck, structure, balancing
+  selection).
+
+. . .
+
+This difference is exactly **Tajima's $D$**.
+<span class="xref">→ derived and applied on Sep 8.</span>
+
+## Diversity across the tree of life
+
+- @leffler2012: autosomal $\pi$ for 167 species spans ~800-fold — from *Lynx*
+  ($\pi \approx 0.01\%$) to *Ciona* sea squirts ($\sim 1/12$ bases differ).
+- Yet **census** population sizes range over many more orders of magnitude.
+- This mismatch is **Lewontin's paradox of variation**: why is genetic diversity so much
+  *less* variable than population size? A recurring theme of the module.
+
+::: {.figure-prompt}
+**FIGURE** — Leffler et al. (2012), Fig 1: autosomal nucleotide diversity $\pi$ for 167
+species across 14 phyla, points ranked by $\pi$ and colored by phylum, log scale. *(CC BY
+4.0 — reuse OK with citation.)*
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Ranked dot plot of per-species nucleotide diversity for 167 species across 14 phyla on a log scale, spanning roughly three orders of magnitude."
+  B) "Cross-species nucleotide diversity plot illustrating that genetic diversity varies far less than census population size across the tree of life."
+-->
+
+# From theory to data {.center}
+
+## Estimating diversity in practice
+
+What the clean equations gloss over:
+
+- **Missing data & sample size** — $\pi$, $\theta_W$ depend on $n$; standardize coverage.
+- **Invariant sites matter** — divide by callable sites, not just variant sites
+  (a classic bug that inflates $\pi$).
+- **Sequencing / genotyping error** looks like rare variants and biases the SFS.
+- **Tools:** `vcftools`, `pixy` (handles missing data correctly), `ANGSD`
+  (genotype likelihoods for low-coverage data).
+
+. . .
+
+**Plant-specific caveats:**
+
+- **Selfing / mixed mating** depress effective recombination and heterozygosity.
+  <span class="xref">→ Sep 1.</span>
+- **Polyploidy** breaks the diploid allele-counting we assumed today.
+  <span class="xref">→ Sep 15.</span>
+
+## Summary — key equations
+
+$$
+p = f_{11} + \tfrac{1}{2}f_{12}
+\qquad
+\{p^2,\ 2pq,\ q^2\}
+\qquad
+H = 1 - \sum_i p_i^2
+$$
+
+$$
+\pi = \frac{1}{\binom{n}{2}}\sum_{i<j} d_{ij}
+\qquad
+\mathbb{E}[\pi] = \theta = 4N_e\mu
+\qquad
+\hat{\theta}_W = \frac{S}{a_n}
+$$
+
+- Allele frequencies are pure bookkeeping; **HW** is the random-mating null.
+- **Drift** + **mutation** set the equilibrium level of diversity, $\theta = 4N_e\mu$.
+- Two estimators of $\theta$ ($\pi$, $\theta_W$); their **disagreement** is the
+  signal we mine for selection and demography.
+
+# References {.center}
+
+::: {#refs}
+:::

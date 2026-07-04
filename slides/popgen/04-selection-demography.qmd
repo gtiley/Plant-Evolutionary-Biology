@@ -1,0 +1,391 @@
+---
+title: "Selection and Demography"
+subtitle: "Population Genomics · PB 495/595 Plant Evolutionary Biology"
+author: "George P. Tiley"
+date: "2026-09-08"
+date-format: "D MMMM YYYY"
+---
+
+## Where we are
+
+- Deck 01: $\pi$ and $\theta_W$ **both** estimate $\theta = 4N_e\mu$ under neutrality +
+  constant size.
+- When they **disagree**, the neutral-equilibrium null is broken — by **demography** or
+  **selection**.
+- **Today:** the **site frequency spectrum (SFS)** packages that signal, and **Tajima's
+  $D$** reads it.
+
+## Learning objectives
+
+By the end you should be able to:
+
+- Build the SFS from a sample and state its **neutral expectation** $\mathbb E[\xi_i]=\theta/i$.
+- Derive **Tajima's $D$** and interpret its sign.
+- Explain why **demography is genome-wide** but **selection is local** — and why that
+  distinction is everything.
+- Describe **linked selection** (sweeps, background selection) and its diversity valley.
+- Derive the neutral substitution rate $k=\mu$ and read $d_N/d_S$.
+
+# The coalescent for a sample {.center}
+
+## From a pair to a sample
+
+For $n$ lineages, each **pair** coalesces at rate $1/2N$, and there are $\binom{n}{2}$
+pairs, so the wait while $k$ lineages remain is short when $k$ is large:
+
+$$
+\mathbb E[T_k] = \frac{2N}{\binom{k}{2}} = \frac{4N}{k(k-1)} .
+$$
+
+:::: {.columns}
+
+::: {.column width="50%"}
+Total branch length summed over all lineages:
+
+$$
+\mathbb E[L] = \sum_{k=2}^{n} k\,\mathbb E[T_k] = 2N\sum_{i=1}^{n-1}\frac{1}{i} = 2N a_n .
+$$
+:::
+
+::: {.column width="50%"}
+::: {.figure-prompt}
+**FIGURE** — coalescent genealogy for a sample of ~6 lineages (Coop, Fig 4.18): long
+shallow tips, short deep internal branches; mutations dropped on branches.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "A coalescent tree for six sampled lineages showing many recent branches and progressively longer waiting times deeper in the tree."
+  B) "Genealogy of a sample with mutations marked on branches, illustrating how branch length determines how many variants of each frequency appear."
+-->
+:::
+
+::::
+
+# The site frequency spectrum {.center}
+
+## Definition and neutral expectation
+
+The **SFS** counts segregating sites by the number of copies $i$ of the derived allele in
+a sample of $n$. Under the neutral, constant-size coalescent:
+
+$$
+\boxed{\;\mathbb E[\xi_i] = \frac{\theta}{i}, \qquad i = 1, \dots, n-1\;}
+$$
+
+:::: {.columns}
+
+::: {.column width="55%"}
+- A mutation on a branch subtending $i$ tips appears $i$ times ⟹ rare variants
+  (singletons, $i=1$) dominate.
+- **Both** diversity estimators are SFS summaries:
+  $\theta_W \propto \sum_i \xi_i$ (counts sites equally),
+  $\pi \propto \sum_i i(n-i)\,\xi_i$ (weights intermediate frequencies).
+:::
+
+::: {.column width="45%"}
+::: {.figure-prompt}
+**FIGURE** — neutral SFS bar chart: derived-allele count $i$ on x, $\xi_i$ on y, showing
+the $1/i$ decline; optionally bottleneck/expansion overlays.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Bar chart of the neutral site frequency spectrum where site counts fall off as one over derived-allele frequency, singletons tallest."
+  B) "Site frequency spectrum contrasting the neutral expectation with the rare-variant excess of an expanding population."
+-->
+:::
+
+::::
+
+## Folded vs. unfolded
+
+- **Unfolded** SFS needs an **outgroup** to polarize ancestral vs. derived (often hard in
+  plants with messy outgroups / paralogy).
+- **Folded** SFS uses the **minor**-allele count $\eta_i = \xi_i + \xi_{n-i}$ — no outgroup
+  required, but loses directionality.
+
+::: {.callout-note}
+Mispolarization (wrong ancestral allele) inflates the high-frequency-derived class and can
+mimic the signal of positive selection — a real hazard in non-model plants.
+:::
+
+# Tajima's $D$ {.center}
+
+## Construction
+
+Both $\pi$ and $\theta_W$ estimate $\theta$, so their **difference** is a contrast of the
+SFS that vanishes under the null. Tajima standardized it [@tajima1989]:
+
+$$
+D = \frac{\pi - \theta_W}{\sqrt{\widehat{\mathrm{Var}}(\pi - \theta_W)}} .
+$$
+
+- $\pi$ leans on **intermediate**-frequency variants; $\theta_W$ counts **all** segregating
+  sites (rare ones included).
+- So $D$ asks: is the SFS **rare-skewed** ($\pi < \theta_W$) or
+  **intermediate-skewed** ($\pi > \theta_W$)?
+
+## Interpreting the sign
+
+| $D$ | SFS shape | Demographic cause (genome-wide) | Selective cause (local) |
+|---|---|---|---|
+| $< 0$ | excess rare variants | population **expansion** | recent **sweep**, purifying selection |
+| $\approx 0$ | neutral | constant size | neutral |
+| $> 0$ | excess intermediate | **bottleneck**, structure | **balancing** selection |
+
+::: {.callout-important}
+$D$ alone is **ambiguous** — the same value can come from history or selection. Resolving
+it is the next slide.
+:::
+
+## Demography vs. selection — the discriminator
+
+:::: {.columns}
+
+::: {.column width="55%"}
+- **Demography** (bottlenecks, expansions, structure) acts on **every locus** — it shifts
+  the **genome-wide** SFS.
+- **Selection** acts on **specific loci** and their linked neighborhoods — a **local**
+  departure against the genome-wide background.
+- ⟹ Build the **genome-wide distribution** of $D$ (or $F_{ST}$), then flag **outliers**.
+:::
+
+::: {.column width="45%"}
+::: {.figure-prompt}
+**FIGURE** — sliding-window Tajima's $D$ along a chromosome: flat genome-wide background
+with a localized dip over a selected gene.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Tajima's D in sliding windows along a chromosome, near a constant baseline except for a sharp negative dip over one gene region."
+  B) "Genome scan distinguishing a uniform demographic background from a localized selection signal at a single locus."
+-->
+:::
+
+::::
+
+## Worked example — maize domestication
+
+Maize was domesticated from **teosinte** ~9,000 ya through a **bottleneck**
+[@wright2005maize; @hufford2012maize]:
+
+- **Genome-wide:** the bottleneck lost diversity and skewed the SFS — a demographic
+  signature present everywhere.
+- **At domestication loci** (e.g. ***tb1***, *teosinte branched1*): a **selective sweep**
+  drove a far stronger **local** loss of diversity and strongly **negative** $D$, standing
+  out above the genome-wide background.
+
+::: {.callout-tip}
+This is the template for crop-origin scans: separate the **demographic** loss (everywhere)
+from the **selective** loss (at the genes that matter).
+:::
+
+# Linked selection {.center}
+
+## Selection drags its neighbors
+
+Selection acts on one site, but **linkage** spreads the consequences to neutral neighbors —
+the dominant force shaping diversity *along* a genome.
+
+- **Selective sweep (hitchhiking):** a favored mutation sweeps to fixation, dragging its
+  haplotype and **erasing** nearby diversity — a **valley** in $\pi$ [@smithhaigh1974].
+- **Background selection:** purging of linked **deleterious** mutations also removes neutral
+  variation, depressing diversity in low-recombination regions [@charlesworth1993].
+
+## How deep and how wide?
+
+:::: {.columns}
+
+::: {.column width="55%"}
+$$
+T_{\text{fix}} \approx \frac{2\ln(2N_e)}{s},
+\qquad
+\text{swept width} \sim \frac{s}{c}.
+$$
+
+- Stronger selection $s$ ⟹ faster fixation ⟹ **deeper** valley (less time for recombination
+  to rescue neutral variants).
+- More recombination $c$ ⟹ **narrower** valley (neighbors escape the sweep).
+- Diversity **recovers** with time $T$ after the sweep.
+:::
+
+::: {.column width="45%"}
+::: {.figure-prompt}
+**FIGURE** — diversity valley: $\pi$ along a chromosome dipping at a swept site, with width
+set by $s/c$; compare a recent vs. older sweep.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Nucleotide diversity plotted along a chromosome showing a deep dip centered on a swept site, recovering with distance."
+  B) "Selective-sweep valley in diversity, narrower when recombination is high and deeper when selection is strong."
+-->
+:::
+
+::::
+
+## Hard, soft, and partial sweeps
+
+- **Hard sweep** — a *single* new mutation fixes; one haplotype dominates ⟹ strongest signal.
+- **Soft sweep** — selection on **standing variation** or recurrent mutation ⟹ *multiple*
+  haplotypes carry the adaptive allele ⟹ weaker, harder-to-detect signal.
+- **Partial sweep** — sampled before fixation (or selection relaxed) ⟹ adaptive allele at
+  intermediate frequency.
+
+::: {.callout-note}
+Crop and local-adaptation alleles are often **soft** (selection on standing variation), so
+classic hard-sweep scans can miss them. <span class="xref">→ deck 05.</span>
+:::
+
+## Computing Tajima's $D$ from an SFS
+
+The sweep signature is an SFS skewed to **rare** variants. Compute $D$ directly from a
+folded/unfolded spectrum:
+
+```r
+TajimaD <- function(sfs) {              # sfs = c(#singletons, #doubletons, ...)
+  n  <- length(sfs) + 1                 # number of sampled chromosomes
+  ss <- sum(sfs)                        # segregating sites
+  a1 <- sum(1 / seq_len(n - 1)); a2 <- sum(1 / seq_len(n - 1)^2)
+  b1 <- (n + 1) / (3 * (n - 1)); b2 <- 2 * (n^2 + n + 3) / (9 * n * (n - 1))
+  c1 <- b1 - 1/a1; c2 <- b2 - (n + 2)/(a1 * n) + a2/a1^2
+  e1 <- c1 / a1;  e2 <- c2 / (a1^2 + a2)
+  theta_pi <- sum(sapply(seq_along(sfs), function(i) i*(n-i)*sfs[i])) / choose(n, 2)
+  theta_w  <- ss / a1
+  (theta_pi - theta_w) / sqrt(e1*ss + e2*ss*(ss-1))
+}
+```
+
+::: {.notes}
+From J. Yang's AGRO-932 Tajima's-D lab. Display-only; change ```` ```r ```` to ```` ```{r} ````
+to run live.
+:::
+
+## Sweep vs. neutral — try it
+
+```r
+sweep   <- c(20, 2, 1, 1, 1)   # rare-variant excess  → D < 0
+neutral <- c( 6, 1, 2, 2, 4)   # flatter spectrum     → D ≈ 0
+TajimaD(sweep)     # strongly negative
+TajimaD(neutral)   # near zero
+```
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- The **sweep** SFS piles up singletons ⟹ $\pi \ll \theta_W$ ⟹ **negative** $D$.
+- Change the counts and watch $D$ move — this is the engine behind the genome scans in deck 05.
+:::
+
+::: {.column width="50%"}
+::: {.figure-prompt}
+**FIGURE** — two SFS bar charts (sweep vs. neutral) side by side, with the computed Tajima's
+$D$ annotated on each.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Two site frequency spectra, a sweep spectrum dominated by singletons with a negative Tajima's D and a flatter neutral spectrum with D near zero."
+  B) "Bar charts contrasting the rare-variant excess of a selective sweep with a neutral spectrum, annotated with their Tajima's D values."
+-->
+:::
+
+::::
+
+# Divergence & molecular evolution {.center}
+
+## The neutral substitution rate
+
+Zoom out from polymorphism to **divergence between species**. Each generation a site gains
+$2N\nu$ new mutations; a **neutral** one fixes with probability $1/2N$. The substitution
+rate is their product:
+
+$$
+k = \underbrace{2N\nu f_0}_{\text{new neutral mutations}} \times
+    \underbrace{\frac{1}{2N}}_{\text{fixation prob}} = \nu f_0 = \mu .
+$$
+
+::: {.callout-important}
+$k = \mu$: the neutral substitution rate **equals the mutation rate, independent of $N$** —
+the basis of the **molecular clock** [@kimura1968]. (More mutations arise in big
+populations, but each is less likely to fix; the two cancel.)
+:::
+
+## Fixation probabilities set the rate
+
+$$
+u_0 = \frac{1}{2N},\qquad
+u_a \approx 2 s_a,\qquad
+u_d \approx \frac{2 s_d}{1 - e^{-4 N s_d}} .
+$$
+
+So substitution rates differ by selection class:
+
+$$
+k_{\text{neutral}} = \mu,\qquad
+k_{\text{adv}} = 4N\nu f_a s_a,\qquad
+k_{\text{del}} = \frac{4N\nu f_d s_d}{1 - e^{-4N s_d}} .
+$$
+
+- Unlike neutral substitution, **selected** rates *do* depend on $N$ — selection is more
+  effective in large populations.
+
+## $d_N/d_S$ — detecting selection from divergence
+
+Split coding divergence into **non-synonymous** ($d_N$) and **synonymous** ($d_S$). Taking
+synonymous sites as neutral ($E[d_S] = 2t\nu$):
+
+$$
+\frac{d_N}{d_S} = f_0 + 4N f_a s_a + \frac{4N f_d s_d}{1 - e^{-4N s_d}} .
+$$
+
+| $d_N/d_S$ | Interpretation |
+|---|---|
+| $< 1$ | **purifying** selection (most genes — non-syn changes removed) |
+| $\approx 1$ | neutral evolution |
+| $> 1$ | **positive** selection (recurrent adaptive non-syn fixation) |
+
+::: {.callout-note}
+Within-species analog $\pi_N/\pi_S$ uses polymorphism instead of divergence; $\pi_N/\pi_S$
+is usually $<1$ (purifying), and $>1$ hints at **balancing** selection.
+:::
+
+## Beyond Tajima: a toolbox
+
+- **Fu & Li's $D$** — weights singletons (external branches) specifically.
+- **Fay & Wu's $H$** — targets the **high-frequency derived** excess left by a sweep.
+- **McDonald–Kreitman** — within- vs. between-species, syn vs. non-syn (run it on the
+  deck-01 *Drosophila* ADH data!).
+- **HKA** — polymorphism vs. divergence across loci.
+
+<span class="xref">→ localized diversity loss around selected sites is the bridge to local
+adaptation, deck 05.</span>
+
+## Summary — key equations
+
+$$
+\mathbb E[\xi_i] = \frac{\theta}{i}
+\qquad
+D = \frac{\pi - \theta_W}{\sqrt{\widehat{\mathrm{Var}}(\pi - \theta_W)}}
+\qquad
+T_{\text{fix}} \approx \frac{2\ln(2N_e)}{s}
+$$
+
+$$
+k = \mu \;\text{(neutral, } N\text{-independent)}
+\qquad
+\frac{d_N}{d_S} = f_0 + 4N f_a s_a + \dots
+$$
+
+- The **SFS** is a compressed genealogy; **Tajima's $D$** flags its skew (but is
+  **ambiguous** alone — **genome-wide vs. local** separates demography from selection).
+- **Linked selection** (sweeps, background selection) carves diversity **valleys**.
+- Neutral substitution gives the **molecular clock** ($k=\mu$); $d_N/d_S$ reads selection
+  from **divergence**.
+
+# References {.center}
+
+::: {#refs}
+:::
