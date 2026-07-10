@@ -1,0 +1,161 @@
+---
+title: "Why Plants? An Overview of Early Plant Evolution"
+subtitle: "Introduction · PB 495/595 Plant Evolutionary Biology"
+author: "George P. Tiley"
+date: "2026-08-18"
+date-format: "D MMMM YYYY"
+footer: "PB 495/595 · Plant Evolutionary Biology · Introduction"
+---
+
+<!-- SKELETON DECK — framework + plant-content prompts to develop.
+     Plant figure-prompts cite the Systematic Botany lectures in
+     resources/teaching/plant_diversity_2026/. Images are copyrighted & large;
+     drop them in later or ask to have specific slides extracted. -->
+
+## Welcome & logistics
+
+- Syllabus, expectations, grading, project overview (placeholder).
+- What this course is: evolution **from populations to ecosystems**, with a genomic and
+  plant-centric lens.
+
+## Learning objectives
+
+By the end you should be able to:
+
+- Motivate **why plants** are powerful (and peculiar) systems for evolutionary genomics.
+- Sketch the **land-plant phylogeny** and its major clades.
+- Name the **key innovations** of the water-to-land transition.
+- Define **alternation of generations** and how it shifts across land plants.
+
+# Why plants? {.center}
+
+## Plants are evolutionary extremists
+
+- **Polyploidy & whole-genome duplication** — rampant (preview popgen deck 06 / genome
+  architecture).
+- **Sessile** — can't flee; adapt in place (local adaptation, popgen deck 05).
+- **Diverse mating systems** — selfing, outcrossing, clonality, apomixis (popgen deck 03).
+- **Long-lived / huge population sizes / hybridization** — stress-test standard models.
+- Economically & ecologically foundational; deep fossil record.
+
+::: {.notes}
+Placeholder — pick 3–4 "hooks" that preview the modules. Tie each to a later lecture.
+:::
+
+# The green lineage {.center}
+
+## Phylogeny of the Archaeplastida
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Archaeplastida → Viridiplantae (green algae + land plants).
+- **Chlorophytes** + **charophytes** (mostly aquatic) → **embryophytes** (land plants,
+  ~monophyletic).
+- Bullet placeholders: primary endosymbiosis; streptophyte algae as sister to land plants.
+:::
+
+::: {.column width="50%"}
+::: {.figure-prompt}
+**FIGURE** — Archaeplastida / green-plant phylogeny. Source:
+`plant_diversity_2026/lecture-2-green-plant-overview.pdf` ~p17 (Chlorophytes/Charophytes/
+land plants) or `Lecture6_gymnosperms.pdf` ~p13 ("Phylogeny of Archaeplastida").
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Phylogenetic tree of green plants showing green algae grades leading to land plants."
+  B) "Cladogram placing charophyte algae as sister to the land plants (embryophytes)."
+-->
+:::
+
+::::
+
+# Onto land {.center}
+
+## The water-to-land transition — key innovations
+
+- **Retention of the embryo** (embryophyte = "maternal care"); cuticle; stomata; sporopollenin.
+- **Vascular tissue** (xylem/phloem) → tracheophytes; roots, leaves.
+- **Seeds** (spermatophytes) → dispersal & desiccation resistance.
+- **Flowers** (angiosperms) → pollination & the carpel.
+
+::: {.figure-prompt}
+**FIGURE** — timeline/ladder of land-plant key innovations (embryo → vascular → seed →
+flower). Source: `lecture-2-green-plant-overview.pdf` ~p31 (multicellularity, embryo
+retention); `Lecture6_gymnosperms.pdf` ~p21 (ovule → seed); `angiosperm-lecture.pdf` ~p19
+(flower structure).
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Ladder of land-plant innovations from embryo retention through vascular tissue, seeds, and flowers."
+  B) "Series of nested synapomorphies marking major transitions in land-plant evolution."
+-->
+
+## Alternation of generations
+
+- Every land plant alternates a **haploid gametophyte** and a **diploid sporophyte**.
+- Evolutionary trend: gametophyte-dominant (bryophytes) → **sporophyte-dominant**
+  (vascular plants, seed plants).
+- Bullet placeholders: spores vs gametes; heterospory; the reduced gametophyte inside the
+  seed/pollen.
+
+::: {.figure-prompt}
+**FIGURE** — haplo-diplontic / alternation-of-generations life cycle. Source:
+`lecture-2-green-plant-overview.pdf` ~p23 ("Haplo-diplontic / alternation of generations").
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Life-cycle diagram alternating a haploid gametophyte and diploid sporophyte via meiosis and fertilization."
+  B) "Alternation of generations showing the trend toward sporophyte dominance in land plants."
+-->
+
+# A whistle-stop clade tour {.center}
+
+## The major land-plant clades
+
+- **Bryophytes** (mosses, liverworts, hornworts) — non-vascular, gametophyte-dominant.
+- **Lycophytes & ferns** (monilophytes) — seedless vascular plants.
+- **Gymnosperms** — conifers, cycads, *Ginkgo*, gnetophytes (~naked seeds).
+- **Angiosperms** — flowering plants (~370,000 spp.), incl. the **ANA grade** at the base
+  (*Amborella*, Nymphaeales, Austrobaileyales).
+
+::: {.figure-prompt}
+**FIGURE** — clade montage / summary tree of land plants. Sources:
+`lecture-4-fernsandlyco.pdf` (ferns & lycophytes), `Lecture6_gymnosperms.pdf` ~p31
+(gymnosperm groups), `angiosperm-lecture.pdf` ~p5, `ANAgrade-lecture.pdf` ~p1 (ANA grade).
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Summary phylogeny of land plants with representative images of bryophytes, ferns, gymnosperms, and angiosperms."
+  B) "Overview of the major land-plant clades and their approximate species richness."
+-->
+
+## Where the course goes from here
+
+- **Populations** (popgen) → **species** (speciation) → **clades & ecosystems** (macro).
+- Tree-thinking underlies all of it. <span class="xref">→ phylogenetics theory, speciation
+  module.</span>
+
+::: {.figure-prompt}
+**FIGURE (optional)** — "tree thinking" schematic. Source:
+`plant_diversity_2026/Treethinking_Lecture.pdf`.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Diagram illustrating how to read evolutionary relationships from a phylogenetic tree."
+  B) "Tree-thinking primer distinguishing clades from grades."
+-->
+
+## Summary
+
+- Plants: polyploid, sessile, mating-system-diverse — evolutionary extremists worth a whole
+  course.
+- Land-plant evolution = a series of **key innovations** (embryo, vascular tissue, seed,
+  flower) on a **green-algal** backbone.
+- **Alternation of generations** shifts from gametophyte- to sporophyte-dominance.
+- (Develop: add the syllabus/logistics content and pick final figures.)
+
+# References {.center}
+
+::: {#refs}
+:::

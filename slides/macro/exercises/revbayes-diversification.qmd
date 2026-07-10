@@ -23,7 +23,7 @@ herbaceous = 1).
 ## Goal
 
 Ask whether a **binary trait** affects speciation/extinction — and then confront the
-**false-positive problem** from the [diversification lecture](../01-diversification.qmd) by
+**false-positive problem** from the [diversification lecture](../06-diversification.qmd) by
 comparing **BiSSE** to a **hidden-state (HiSSE) / character-independent (CID)** null.
 
 ## 1. Setup and data

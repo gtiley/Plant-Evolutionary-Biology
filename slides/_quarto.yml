@@ -3,11 +3,12 @@ project:
   output-dir: _site
   render:
     - "*.qmd"
+    - "intro/*.qmd"
     - "popgen/*.qmd"
-    - "phylo/*.qmd"
+    - "speciation/*.qmd"
     - "macro/*.qmd"
-    - "!popgen/exercises/"   # standalone exercises/notebooks — render on their own
-    - "!phylo/exercises/"    # standalone RevBayes practicals
+    - "!popgen/exercises/"      # standalone exercises/notebooks — render on their own
+    - "!speciation/exercises/"  # standalone RevBayes practicals
     - "!macro/exercises/"
 
 # Shared metadata applied to every deck in the project.

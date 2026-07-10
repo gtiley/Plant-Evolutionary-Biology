@@ -1,0 +1,65 @@
+---
+title: "Photosynthesis Systems and Ecosystem Change"
+subtitle: "Macroevolution · PB 495/595 Plant Evolutionary Biology"
+author: "George P. Tiley"
+date: "2026-12-01"
+date-format: "D MMMM YYYY"
+footer: "PB 495/595 · Plant Evolutionary Biology · Macroevolution"
+---
+
+<!-- SKELETON DECK — OPTIONAL / TENTATIVE.
+     This topic is commented out in schedule.md (Dec 1 currently = project
+     presentations). Keep as a spare lecture; delete if not used. -->
+
+::: {.callout-warning}
+**Tentative deck.** Dec 1 in the current schedule is *Class Project 4 (Presentations)*; this
+photosynthesis/ecosystem lecture is commented out in `schedule.md`. Develop only if you
+reinstate it.
+:::
+
+## Learning objectives
+
+By the end you should be able to:
+
+- Contrast **C3, C4, and CAM** photosynthesis and their evolutionary origins.
+- Explain how photosynthetic innovations reshaped **ecosystems** (e.g. grassland expansion).
+- Link physiological evolution to **macroevolutionary** and **climate** change.
+
+# Photosynthetic pathways {.center}
+
+## C3 / C4 / CAM
+
+- The **C3** baseline and photorespiration; the CO₂-concentrating solutions **C4** and **CAM**.
+- **Recurrent, convergent** origins of C4 (dozens of times); CAM in succulents/epiphytes.
+- Anatomy (Kranz) + biochemistry; environmental drivers (heat, aridity, low CO₂).
+
+::: {.figure-prompt}
+**FIGURE** — C3 vs C4 vs CAM schematic (leaf anatomy + carbon flux). Source:
+`plant_diversity_2026/poales.pdf` (grasses/C4) or a physiology textbook figure.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Comparative diagram of C3, C4, and CAM carbon fixation and leaf anatomy."
+  B) "Schematic of CO2-concentrating mechanisms in C4 and CAM plants versus C3."
+-->
+
+# Ecosystems {.center}
+
+## Photosynthesis and ecosystem change
+
+- Late-Miocene **C4 grassland expansion**; feedbacks with climate, fire, and grazers.
+- Plants as **ecosystem engineers** across deep time (the water-to-land transition;
+  atmospheric O₂/CO₂).
+- <span class="xref">→ ties back to key innovations (Nov 17) and the whole-course arc
+  (populations → ecosystems).</span>
+
+## Summary
+
+- **C4/CAM** are convergent CO₂-concentrating innovations with major ecological impact.
+- Photosynthetic evolution helped **remake ecosystems and climate**.
+- (Develop only if this day is reinstated.)
+
+# References {.center}
+
+::: {#refs}
+:::

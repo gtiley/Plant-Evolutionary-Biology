@@ -31,7 +31,7 @@ to still teach ancestral ranges.
 Fit the **Geographic State-dependent Speciation and Extinction (GeoSSE)** model to the
 Hawaiian *Kadua* radiation across **two regions** (old vs. young islands) and estimate
 **ancestral ranges** — testing whether **geography shapes diversification**
-([biogeography lecture](../02-biogeography.qmd)).
+([biogeography lecture](../07-biogeography.qmd)).
 
 Ranges (2 areas ⟹ 3 occupied states): `A` (old only), `B` (young only), `AB` (widespread).
 

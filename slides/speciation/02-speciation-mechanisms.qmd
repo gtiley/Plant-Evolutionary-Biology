@@ -1,0 +1,67 @@
+---
+title: "Plant Speciation Mechanisms"
+subtitle: "Speciation Genomics · PB 495/595 Plant Evolutionary Biology"
+author: "George P. Tiley"
+date: "2026-10-01"
+date-format: "D MMMM YYYY"
+footer: "PB 495/595 · Plant Evolutionary Biology · Speciation Genomics"
+---
+
+<!-- SKELETON DECK — the distinctive ways plants make species. -->
+
+## Learning objectives
+
+By the end you should be able to:
+
+- List the major **modes of plant speciation** and their genomic signatures.
+- Explain why **polyploidy** and **hybridization** make plants special.
+- Connect reproductive-isolation barriers to earlier popgen concepts.
+
+# Isolating barriers {.center}
+
+## Pre- and post-zygotic isolation
+
+- **Prezygotic:** phenology, pollinator, habitat, mechanical, gametic (placeholder).
+- **Postzygotic:** hybrid inviability/sterility; Bateson–Dobzhansky–Muller incompatibilities.
+- Isolation is usually **multi-dimensional and incomplete** in plants.
+
+# Modes of speciation {.center}
+
+## The plant speciation toolkit
+
+- **Polyploidy / hybrid speciation** — instantaneous reproductive isolation via WGD
+  (allo-/autopolyploidy). <span class="xref">→ popgen deck 06; genome architecture (Nov 10).</span>
+- **Pollinator shifts** — floral trait change → assortative mating (e.g. *Mimulus*, orchids).
+- **Mating-system shifts** — selfing as an isolating + diversification factor
+  <span class="xref">(popgen deck 03)</span>.
+- **Chromosomal** — rearrangements, aneuploidy.
+- **Ecological / divergent selection** — soils, elevation, climate
+  <span class="xref">(popgen deck 05)</span>.
+
+::: {.figure-prompt}
+**FIGURE** — panel of plant speciation modes (polyploid origin; pollinator-shift sister
+species; selfing syndrome). Source: instructor photos or a review figure — TBD.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Composite figure illustrating polyploid, pollinator-shift, and mating-system speciation in plants."
+  B) "Examples of the main routes to reproductive isolation in plants."
+-->
+
+## Speciation with gene flow
+
+- Divergence despite ongoing gene flow; "genomic islands of divergence."
+- Sets up **adaptive introgression** <span class="xref">(Oct 8)</span> and species networks
+  <span class="xref">(Oct 15)</span>.
+
+## Summary
+
+- Plants speciate via **polyploidy, hybridization, pollinator/mating-system shifts,
+  chromosomal, and ecological** routes — often with gene flow.
+- Reproductive isolation is typically **multifarious and porous**.
+- (Develop: pick 2–3 worked plant case studies.)
+
+# References {.center}
+
+::: {#refs}
+:::

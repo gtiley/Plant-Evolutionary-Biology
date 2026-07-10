@@ -1,0 +1,63 @@
+---
+title: "Species-Level Diversity: More Than Population-Level Processes?"
+subtitle: "Macroevolution · PB 495/595 Plant Evolutionary Biology"
+author: "George P. Tiley"
+date: "2026-10-29"
+date-format: "D MMMM YYYY"
+footer: "PB 495/595 · Plant Evolutionary Biology · Macroevolution"
+---
+
+<!-- SKELETON DECK — opens the Macroevolution module. -->
+
+## Learning objectives
+
+By the end you should be able to:
+
+- Distinguish **microevolution** (within/among populations) from **macroevolution**
+  (among species/clades).
+- Explain why clade **species richness** varies so enormously.
+- Frame diversification as a **birth–death** process (preview).
+
+# Scaling up {.center}
+
+## From populations to clades
+
+- Population processes (drift, selection, gene flow) vs **lineage birth and death**.
+- Is macroevolution "just" microevolution over time, or are there **emergent** processes
+  (species selection, clade-level trends)? Placeholder debate.
+
+## The unevenness of diversity
+
+- Species richness is wildly **uneven** across the tree (asterids vs *Amborella*; grasses vs
+  gymnosperms).
+- Candidate drivers: **key innovations**, ecological opportunity, time, trait-dependent rates.
+  <span class="xref">→ trait-dependent diversification; key innovations.</span>
+
+::: {.figure-prompt}
+**FIGURE** — a plant tree scaled by clade richness (or a bar chart of richness across major
+clades). Source: `plant_diversity_2026` phylogeny slides (e.g. `angiosperm-lecture.pdf`).
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Phylogeny of land plants with clades sized by species richness, highlighting angiosperm dominance."
+  B) "Bar chart of species richness across major plant clades showing extreme unevenness."
+-->
+
+# The framework {.center}
+
+## Birth–death, previewed
+
+- Model clades as **speciation ($\lambda$) − extinction ($\mu$)** processes.
+- Net diversification $r=\lambda-\mu$; the engine for the rest of the module.
+  <span class="xref">→ diversification deck.</span>
+
+## Summary
+
+- Macroevolution studies **lineage** birth/death, not just allele dynamics.
+- Diversity is **uneven**; explaining it is the module's throughline.
+- (Develop: choose the framing example and the emergent-processes discussion.)
+
+# References {.center}
+
+::: {#refs}
+:::

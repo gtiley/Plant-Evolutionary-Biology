@@ -22,7 +22,7 @@ See [`SETUP.md`](SETUP.md) for installing RevBayes + RevGadgets and getting the 
 
 Estimate a **time-calibrated phylogeny** for Hawaiian *Kadua* (Rubiaceae) from molecular
 data, and see first-hand why **molecular data alone cannot date a tree** (the rate–time
-non-identifiability from the [dating lecture](../02-molecular-dating.qmd)).
+non-identifiability from the [dating lecture](../06-molecular-dating.qmd)).
 
 **Model pieces** (each a swappable node in the RevBayes graphical model):
 

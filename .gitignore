@@ -11,7 +11,7 @@
 /slides/popgen/exercises/*.html
 /slides/popgen/exercises/*_files
 /slides/popgen/exercises/*.quarto_ipynb
-/slides/phylo/exercises/*.html
-/slides/phylo/exercises/*_files
+/slides/speciation/exercises/*.html
+/slides/speciation/exercises/*_files
 /slides/macro/exercises/*.html
 /slides/macro/exercises/*_files

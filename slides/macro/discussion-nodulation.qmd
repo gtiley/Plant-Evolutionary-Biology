@@ -1,0 +1,38 @@
+---
+title: "Discussion — Evolution of Nodulation and Nitrogen Fixation"
+subtitle: "Macroevolution · PB 495/595 · Paper Discussion"
+author: "George P. Tiley"
+date: "2026-11-05"
+date-format: "D MMMM YYYY"
+footer: "PB 495/595 · Plant Evolutionary Biology · Discussion"
+---
+
+<!-- SKELETON DISCUSSION GUIDE. -->
+
+## Today's paper
+
+**Zhao et al. (2021)**, *Molecular Plant*.
+[S1674-2052(21)00072-1](https://www.cell.com/molecular-plant/fulltext/S1674-2052(21)00072-1)
+
+## Background you'll need
+
+- Comparative methods, ancestral-state reconstruction, gain/loss models
+  <span class="xref">(comparative methods, Nov 3).</span>
+- The **nitrogen-fixing clade** and the "precursor + multiple losses" hypothesis.
+
+## Discussion questions (draft)
+
+1. What is the macroevolutionary puzzle about nodulation (single vs. multiple origins)?
+2. What data + comparative models did the authors use?
+3. How do they infer gains vs. losses, and how robust is it?
+4. What is the evidence for a **predisposition** followed by losses?
+5. How does model choice affect the conclusion?
+6. Implications for engineering N-fixation into crops?
+
+::: {.figure-prompt}
+**FIGURE** — the paper's ancestral-state / gain-loss reconstruction on the phylogeny.
+:::
+
+## Wrap-up
+
+- Placeholder: connect to key innovations (Nov 17) and trait-dependent diversification.

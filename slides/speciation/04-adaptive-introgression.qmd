@@ -1,0 +1,64 @@
+---
+title: "Speciation with Adaptive Introgression"
+subtitle: "Speciation Genomics · PB 495/595 Plant Evolutionary Biology"
+author: "George P. Tiley"
+date: "2026-10-08"
+date-format: "D MMMM YYYY"
+footer: "PB 495/595 · Plant Evolutionary Biology · Speciation Genomics"
+---
+
+<!-- SKELETON DECK — also a computer-activity day. -->
+
+## Learning objectives
+
+By the end you should be able to:
+
+- Distinguish **introgression** from incomplete lineage sorting.
+- Define **adaptive introgression** and its genomic signatures.
+- Detect and interpret gene flow with $D$/$f$-statistics.
+
+# Gene flow between species {.center}
+
+## Introgression vs ILS
+
+- Hybridization → **introgression** (gene flow across species boundaries).
+- Both ILS and introgression make gene trees disagree — tell them apart by **asymmetry**
+  <span class="xref">(popgen deck 06; phylo theory)</span>.
+- **Adaptive introgression:** an introgressed allele is favored and sweeps in the recipient.
+
+::: {.figure-prompt}
+**FIGURE** — adaptive-introgression cartoon: donor allele crossing a species boundary and
+rising to high frequency in the recipient. Source: redraw from a review (Suarez-Gonzalez et
+al.) — TBD.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Diagram of an advantageous allele introgressing from one species into another and sweeping to high frequency."
+  B) "Schematic contrasting neutral introgression with adaptive introgression."
+-->
+
+# Detecting gene flow {.center}
+
+## $D$-statistics and friends
+
+- **ABBA–BABA / Patterson's $D$**, $f_4$, $f_{\text{dM}}$ along the genome.
+- Excess allele sharing between non-sister taxa ⟹ introgression signal.
+- Plant examples: *Helianthus* (sunflowers), oaks (*Quercus* syngameons), *Populus*.
+
+::: {.callout-note}
+## Computer activity (Oct 8)
+Placeholder: compute $D$/$f_{\text{dM}}$ on a plant SNP dataset (or simulate introgression
+and recover it). Could reuse the msprime gene-flow exercise as a warm-up.
+<span class="xref">→ popgen exercises.</span>
+:::
+
+## Summary
+
+- **Introgression** ≠ ILS; adaptive introgression moves *useful* alleles across species.
+- $D$/$f$-statistics detect it from genome-wide allele sharing.
+- (Develop: finalize the computer activity + a plant case study.)
+
+# References {.center}
+
+::: {#refs}
+:::
