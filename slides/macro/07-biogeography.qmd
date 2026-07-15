@@ -43,6 +43,24 @@ instead of nucleotides, plus special **cladogenetic** events at nodes.
 
 # The DEC model {.center}
 
+## From a substitution model to DEC
+
+The simplest range models are just **substitution models** — a CTMC over ranges, capturing
+only **anagenetic** change (island-hopping *along* branches). **DEC** [@ree2008] gets there
+by generalizing a substitution model in three moves:
+
+- **(1) States are *sets* of areas** — not just $\{A,B,C\}$ but $\{A, B, C, AB, AC, \dots\}$
+  (the powerset of areas).
+- **(2) Constrain the $Q$ matrix** — only **single-area** gains (dispersal) and losses
+  (extinction) per instant; multi-area jumps are forbidden.
+- **(3) Add *cladogenetic* events at nodes** — range inheritance at speciation, which a plain
+  substitution model has no way to express.
+
+::: {.callout-note}
+Move (3) is the key: pure anagenetic models can't say *how a range splits when a lineage
+speciates*. That's what makes DEC "biogeographic," not just a fancy substitution model.
+:::
+
 ## Dispersal–Extinction–Cladogenesis
 
 **DEC** [@ree2008] splits range evolution into two clocks:

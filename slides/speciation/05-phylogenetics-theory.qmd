@@ -4,7 +4,7 @@ subtitle: "Speciation Genomics · PB 495/595 Plant Evolutionary Biology"
 author: "George P. Tiley"
 date: "2026-10-13"
 date-format: "D MMMM YYYY"
-footer: "PB 495/595 · Plant Evolutionary Biology · Phylogenetics"
+footer: "PB 495/595 · Plant Evolutionary Biology · Speciation Genomics"
 ---
 
 ## Where we are
@@ -149,6 +149,42 @@ $$
 ::: {.callout-important}
 ML gives a point estimate + bootstrap; Bayesian gives a full **posterior distribution** —
 natural for propagating uncertainty into dating and comparative methods (next lectures).
+:::
+
+## Models as graphical models — why RevBayes
+
+:::: {.columns}
+
+::: {.column width="56%"}
+A Bayesian phylogenetic model is just a **directed graph** wiring the pieces together:
+
+- **stochastic** nodes (random variables with priors: rates, the tree),
+- **deterministic** nodes (functions, e.g. $Q = f(\kappa,\pi)$),
+- **constant** nodes (fixed values / data you clamp).
+
+**RevBayes** [@hohna2016] lets you *write that graph directly* — swap the substitution model,
+clock, or tree prior as independent modules and see exactly what each contributes.
+:::
+
+::: {.column width="44%"}
+::: {.figure-prompt}
+**FIGURE** — a small probabilistic-graphical-model DAG for a phylo model (data ← CTMC ←
+{tree, $Q$, clock}), stochastic vs. deterministic nodes shaded. Source: RevBayes /
+Höhna et al. 2016 model-graph style.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Directed graphical model of a Bayesian phylogenetic analysis with stochastic, deterministic, and clamped-data nodes."
+  B) "Node-and-arrow diagram showing how substitution model, clock, and tree prior feed the sequence likelihood."
+-->
+:::
+
+::::
+
+::: {.notes}
+This modular "graphical model" framing is exactly why we use RevBayes in the practicals —
+the code mirrors the graph, so you learn what each modeling choice does.
+<span class="xref">→ RevBayes practicals.</span>
 :::
 
 # One tree isn't the whole story {.center}

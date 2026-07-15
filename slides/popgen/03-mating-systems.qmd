@@ -162,6 +162,44 @@ reshapes diversity, LD, and the efficacy of selection genome-wide.
 <span class="xref">→ reduced diversity feeds directly into the SFS/Tajima's $D$ signatures
 of deck 04.</span>
 
+# Avoiding selfing {.center}
+
+## Self-incompatibility and heterostyly
+
+Many plants **enforce outcrossing** — the mirror image of selfing, and a genomic signature
+in its own right.
+
+:::: {.columns}
+
+::: {.column width="56%"}
+- **Self-incompatibility (SI):** the **S-locus** rejects self (and matching) pollen —
+  *gametophytic* (pollen's own haploid $S$ allele) or *sporophytic* (parent diploid genotype).
+- SI is a textbook **disassortable / balancing-selection** system: rare $S$-haplotypes mate
+  more, so selection maintains **many long-lived alleles** at **excess heterozygosity** —
+  the plant analog of the fungal mating-type example.
+- **Heterostyly** (distyly in *Primula*, Darwin) — a morphological outcrossing switch
+  (pin/thrum) controlled by a linked supergene.
+:::
+
+::: {.column width="44%"}
+::: {.figure-prompt}
+**FIGURE** — SI pollen–pistil recognition and/or the *Primula* pin vs. thrum heterostyly
+diagram; optionally the S-allele frequency spectrum (many balanced alleles).
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Diagram of self-incompatibility rejecting self pollen at the S-locus, and Primula pin/thrum heterostyly morphs."
+  B) "Illustration of plant outcrossing enforcement via the S-locus and heterostyly."
+-->
+:::
+
+::::
+
+::: {.callout-note}
+$S$-loci are among the **oldest balanced polymorphisms known** (trans-specific $S$ alleles
+older than the species). <span class="xref">→ balancing selection, deck 04.</span>
+:::
+
 # Clonality and apomixis {.center}
 
 ## When sex is rare or absent

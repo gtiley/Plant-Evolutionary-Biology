@@ -1,0 +1,244 @@
+---
+title: "From Genetic to Phenotypic Variation"
+subtitle: "Population Genomics · PB 495/595 Plant Evolutionary Biology"
+author: "George P. Tiley"
+date: "2026-09-15"
+date-format: "D MMMM YYYY"
+footer: "PB 495/595 · Plant Evolutionary Biology · Population Genomics"
+---
+
+::: {.callout-note}
+## A bridge deck (module capstone)
+This synthesis connects the popgen statistics we've built ($H$, $F_{ST}$, $F$, kinship) to
+the **phenotypic** variation that selection and breeding act on — the gateway to
+**quantitative genetics** (Falconer & Mackay; AGRO-931). It has no dedicated schedule day;
+use it as an end-of-module synthesis or exam review. Depth here is **key results + intuition**,
+not full derivations.
+:::
+
+## Where we are
+
+- All module long we measured **genetic** variation: heterozygosity $H$, diversity $\pi$,
+  differentiation $F_{ST}$, inbreeding $F$, kinship.
+- But selection, adaptation, and plant breeding act on **phenotypes** — height, flowering
+  time, yield.
+- **Today:** how the *same* quantities map onto **phenotypic variance**, and why our popgen
+  statistics predict a population's response to selection.
+
+## Learning objectives
+
+By the end you should be able to:
+
+- Decompose a genotypic value into **breeding value + dominance deviation**.
+- Define the **average effect** $\alpha$, additive variance $V_A$, and heritability $h^2$.
+- Explain why **heterozygosity is the fuel for selection** ($V_A = 2pq\,\alpha^2$).
+- Connect $F_{ST}\leftrightarrow Q_{ST}$, **kinship → heritability**, and $F$ → inbreeding
+  depression.
+
+# The genotype–phenotype map {.center}
+
+## Genotypic values
+
+For a single biallelic locus affecting a quantitative trait, assign **genotypic values**
+around the midpoint:
+
+$$
+\begin{array}{c|ccc}
+\text{genotype} & A_1A_1 & A_1A_2 & A_2A_2 \\ \hline
+\text{value} & +a & d & -a
+\end{array}
+$$
+
+- $a$ = additive effect; $d$ = **dominance** deviation ($d=0$: additive; $d=a$: full dominance).
+- Population mean (under HW): $\;\mu = a(p-q) + 2pq\,d$.
+
+## Average effect & breeding value
+
+What a parent **transmits** is alleles, not genotypes. The **average effect of an allele
+substitution**:
+
+$$
+\alpha = a + d(q - p).
+$$
+
+Partition each genotypic value into transmissible + non-transmissible parts:
+
+$$
+G = \mu + \underbrace{A}_{\text{breeding value}} + \underbrace{D}_{\text{dominance deviation}} .
+$$
+
+- The **breeding value** $A$ = sum of the average effects of an individual's alleles — the
+  part that responds to selection and passes to offspring.
+
+## Partitioning the variance
+
+Phenotype adds environment: $P = G + E$. The variances partition (with
+$\mathrm{Cov}(A,D)=0$ under random mating):
+
+$$
+V_P = V_A + V_D + V_E, \qquad
+V_A = 2pq\,\alpha^2, \qquad
+V_D = (2pq\,d)^2 .
+$$
+
+::: {.callout-important}
+Note $V_A = 2pq\,\alpha^2$ **depends on allele frequency** (via $2pq$) — the additive variance
+a population presents to selection is set by its **genetic diversity**, not just gene action.
+:::
+
+# Four bridges to what we already measured {.center}
+
+## Bridge 1 — heterozygosity *is* evolvability
+
+The $2pq$ in $V_A$ is exactly the **expected heterozygosity** $H$ from deck 01:
+
+$$
+V_A = 2pq\,\alpha^2 = H\,\alpha^2 .
+$$
+
+:::: {.columns}
+
+::: {.column width="58%"}
+- **More heterozygosity ⟹ more additive variance ⟹ more response to selection.**
+- Anything that lowers $H$ lowers evolvability: **small $N_e$**, **bottlenecks**, and
+  **selfing** <span class="xref">(decks 01, 03)</span>.
+- Drift erodes $V_A$ at the **same rate** it erodes $H$:
+  $\;V_{A,t} \approx V_{A,0}\left(1-\tfrac{1}{2N_e}\right)^{t}.$
+:::
+
+::: {.column width="42%"}
+::: {.figure-prompt}
+**FIGURE** — $V_A$ (or response to selection) rising with heterozygosity / falling with
+selfing rate; e.g. $V_A$ vs. $H$ across populations.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Plot of additive genetic variance increasing with population heterozygosity."
+  B) "Illustration that low-diversity populations have little additive variance to respond to selection."
+-->
+:::
+
+::::
+
+## Heritability & the breeder's equation
+
+Only the **additive** part is reliably transmitted, so we distinguish:
+
+$$
+H^2 = \frac{V_G}{V_P}\ \text{(broad-sense)}, \qquad
+h^2 = \frac{V_A}{V_P}\ \text{(narrow-sense)} .
+$$
+
+The response to selection — the **breeder's equation**:
+
+$$
+R = h^2\,S \qquad (\text{response} = \text{narrow-sense } h^2 \times \text{selection differential}).
+$$
+
+- $h^2$ (not $H^2$) predicts response, because parents pass **alleles**, not genotypes.
+- Fitness-related traits tend to have **low $h^2$** — selection has already used up their
+  additive variance <span class="xref">(the efficacy-of-selection theme, deck 04/05)</span>.
+
+## Bridge 2 — $F_{ST}$ and its phenotypic twin $Q_{ST}$
+
+$Q_{ST}$ is the **quantitative-trait analog of $F_{ST}$** — differentiation in a trait's
+*additive* variance among populations:
+
+$$
+Q_{ST} = \frac{V_{A,\text{between}}}{V_{A,\text{between}} + 2\,V_{A,\text{within}}} .
+$$
+
+:::: {.columns}
+
+::: {.column width="55%"}
+Under **neutral drift**, $\;\mathbb E[Q_{ST}] = F_{ST}$. So comparing them tests for selection
+on the trait:
+
+- $Q_{ST} > F_{ST}$ ⟹ **divergent** selection (local adaptation).
+- $Q_{ST} \approx F_{ST}$ ⟹ consistent with drift.
+- $Q_{ST} < F_{ST}$ ⟹ **stabilizing** (uniform) selection.
+:::
+
+::: {.column width="45%"}
+::: {.figure-prompt}
+**FIGURE** — $Q_{ST}$ vs. $F_{ST}$ comparison: trait points above the 1:1 line (divergent
+selection) vs. the neutral $F_{ST}$ band.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Plot comparing Q_ST for several traits against the neutral F_ST expectation, with traits above the line indicating divergent selection."
+  B) "Q_ST–F_ST comparison distinguishing divergent from stabilizing selection on quantitative traits."
+-->
+:::
+
+::::
+
+<span class="xref">→ the trait-level test for local adaptation (decks 02, 05).</span>
+
+## Bridge 3 — kinship builds heritability
+
+The genetic **covariance between relatives** is built from the **same kinship coefficient**
+$f_{XY}$ we defined via IBD in deck 03:
+
+$$
+\mathrm{Cov}_G(X,Y) = 2 f_{XY}\,V_A + \Delta_{XY}\,V_D,
+\qquad
+\mathrm{Cov}(\text{parent},\text{offspring}) = \tfrac12 V_A .
+$$
+
+:::: {.columns}
+
+::: {.column width="58%"}
+- Relatives resemble each other **in proportion to their kinship** — that's how $V_A$ and
+  $h^2$ are *estimated* (parent–offspring regression, sib designs, the animal model).
+- The IBD/coancestry machinery from deck 03 **is** the engine of quantitative genetics.
+:::
+
+::: {.column width="42%"}
+::: {.figure-prompt}
+**FIGURE** — parent–offspring regression whose slope estimates $h^2$ (or a resemblance-vs-
+kinship plot).
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one:
+  A) "Parent–offspring regression of a trait, with the slope indicating heritability."
+  B) "Plot showing that relatives resemble each other in proportion to their kinship coefficient."
+-->
+:::
+
+::::
+
+## Bridge 4 — inbreeding depression
+
+Inbreeding coefficient $F$ (deck 03) lowers heterozygosity — and, when dominance is
+**directional** (deleterious recessives, $d>0$ on average), lowers the **mean**:
+
+$$
+\Delta M \;\approx\; -\,2F\sum_{\text{loci}} p q\, d \qquad (\text{inbreeding depression}).
+$$
+
+- $F$ also **redistributes variance**: within inbred lines $V_A$ falls; **among** lines it
+  rises ($2F V_A$) — why breeders use RILs/inbred lines.
+- Plant relevance: selfers suffer (or have **purged**) depression; crossing inbred lines
+  recovers it as **heterosis / hybrid vigor**. <span class="xref">(decks 03, 06)</span>
+
+# Summary {.center}
+
+## Genetic variation → phenotypic variation
+
+| We measured (popgen) | It sets (quant gen) |
+|---|---|
+| heterozygosity $H = 2pq$ | additive variance $V_A = H\alpha^2$ → response $R=h^2S$ |
+| differentiation $F_{ST}$ | trait differentiation $Q_{ST}$ (selection test) |
+| kinship $f_{XY}$ (IBD) | resemblance $\mathrm{Cov}_G = 2f_{XY}V_A + \dots$ → $h^2$ |
+| inbreeding $F$ | inbreeding depression; heterosis |
+
+- The statistics of **genetic** variation are the statistics of **evolvability**.
+- This is the doorway to **quantitative genetics & plant breeding**
+  [@falconer1996; @lynchwalsh1998]; $Q_{ST}$–$F_{ST}$ is its evolutionary test
+  [@spitze1993; @leinonen2013].
+
+# References {.center}
+
+::: {#refs}
+:::
