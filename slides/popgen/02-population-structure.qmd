@@ -28,8 +28,12 @@ By the end you should be able to:
 - Explain why "inbred" only means something **relative to a reference population**.
 - Derive Wright's **$F_{IS}$, $F_{IT}$, $F_{ST}$** and the identity linking them.
 - Use the **Wahlund effect** to explain heterozygote deficits in pooled samples.
+- Choose among **$G_{ST}$, $G'_{ST}$, Jost's $D$** and explain the diversity **ceiling**;
+  partition variance hierarchically with **AMOVA**.
 - Define **linkage disequilibrium** $D$ and explain how structure generates it.
-- Read a **PCA** and an **ADMIXTURE** plot.
+- Explain how **PCA** works — standardization, the kinship matrix, eigendecomposition — and
+  read a PCA and an **ADMIXTURE** plot.
+- Describe **isolation by distance** and what an **effective migration surface** adds.
 
 # Inbreeding is relative {.center}
 
@@ -154,6 +158,117 @@ pooled sample shows a heterozygote deficit vs. its HW expectation.
   B) "Illustration that merging two differentiated but randomly mating populations creates an apparent excess of homozygotes."
 -->
 
+## Beyond two alleles: $G_{ST}$
+
+$F_{ST}$ as written assumes **two alleles**. Nei generalized it using **gene diversity**
+[@nei1973gst]:
+
+$$
+H = 1 - \sum_i p_i^2, \qquad
+G_{ST} = \frac{H_T - H_S}{H_T}.
+$$
+
+- Identical in form to $F_{ST}$ — just with the multi-allelic $H$.
+- For a biallelic locus, $H = 2pq$ and $G_{ST} = F_{ST}$ exactly.
+- This is what you actually compute for **microsatellites, cpDNA haplotypes, AFLPs** — the
+  workhorse markers of plant population genetics.
+
+## The ceiling problem
+
+$G_{ST}$ has an awkward property: it is **bounded above by the within-population diversity**.
+
+$$
+\max G_{ST} \;\approx\; 1 - H_S .
+$$
+
+::: {.callout-warning}
+With microsatellites at $H_S \approx 0.9$, $G_{ST}$ **cannot exceed $\approx 0.1$ — even if the
+populations share not one allele.** A "low $F_{ST}$" from SSR data may mean *nothing* about
+differentiation. **Never compare $F_{ST}/G_{ST}$ across marker types.**
+:::
+
+| Measure | Idea | Use |
+|---|---|---|
+| $G_{ST}$ | fixation index (deficit of heterozygosity) | comparable to $F_{ST}$ theory |
+| $G'_{ST}$ | $G_{ST}$ **standardized** by its maximum [@hedrick2005] | high-diversity markers |
+| Jost's $D$ | **actual** differentiation, via effective numbers of alleles [@jost2008] | "how different are the allele pools?" |
+
+- They answer *different questions* — report a fixation index **and** a standardized measure
+  [@meirmans2011].
+
+::: {.figure-prompt}
+**FIGURE** — maximum attainable $G_{ST}$ plotted against within-population diversity $H_S$,
+showing the ceiling collapse as $H_S \to 1$.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Curve showing the maximum possible G_ST declining toward zero as within-population gene diversity approaches one."
+  B) "Illustration that highly polymorphic markers impose a low ceiling on measured differentiation."
+-->
+
+## Whose $F_{ST}$? Parameter vs. estimator
+
+The formulas so far define a **parameter**. Real data need an **estimator** that accounts for
+finite samples.
+
+:::: {.columns}
+
+::: {.column width="54%"}
+- **Weir & Cockerham's $\theta$** [@weircockerham1984] — corrects for **sample size** and the
+  **number of demes**; this is what most software reports as "$F_{ST}$."
+- **Hudson's estimator** — often preferred for pairwise comparisons.
+- **Ratio of averages, not average of ratios** [@bhatia2013]: sum numerators and denominators
+  across loci, *then* divide. Averaging per-locus $F_{ST}$ biases results, badly so with rare
+  variants.
+:::
+
+::: {.column width="46%"}
+::: {.callout-note}
+Estimates can come out **negative**. That isn't a bug — it means the between-population
+component is indistinguishable from zero. Report it or truncate to 0, but say which.
+:::
+:::
+
+::::
+
+## AMOVA — hierarchical variance partitioning
+
+**Analysis of Molecular Variance** [@excoffier1992] applies an ANOVA-style decomposition to
+genetic data, using a **distance matrix among haplotypes**:
+
+$$
+\sigma^2_{\text{total}} = \underbrace{\sigma^2_{a}}_{\text{among groups}}
++ \underbrace{\sigma^2_{b}}_{\text{among pops within groups}}
++ \underbrace{\sigma^2_{c}}_{\text{within pops}}
+$$
+
+:::: {.columns}
+
+::: {.column width="54%"}
+- Because it uses **distances**, AMOVA counts *how different* two haplotypes are — not merely
+  whether they differ. (With identity-only distances, $\Phi_{ST} \approx G_{ST}$.)
+- Yields **$\Phi$-statistics**: $\Phi_{ST}$ (among populations, overall), $\Phi_{SC}$ (among
+  populations *within* groups), $\Phi_{CT}$ (among groups).
+- Significance by **permutation**, not a parametric table.
+- Ubiquitous in plant studies with SSR, cpDNA, and AFLP data.
+:::
+
+::: {.column width="46%"}
+::: {.figure-prompt}
+**FIGURE** — AMOVA output: hierarchical sampling schematic (regions ⊃ populations ⊃
+individuals) beside a variance-components table with % of variance and $\Phi$-statistics.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Diagram of a hierarchical sampling design beside a table partitioning molecular variance among regions, among populations within regions, and within populations."
+  B) "AMOVA variance components showing where most genetic variation resides in a hierarchical design."
+-->
+:::
+
+::::
+
 ## $F_{ST}$ in practice: genome-wide vs. per-locus
 
 - Report a **genome-wide** $F_{ST}$ as the differentiation baseline; scan **per-locus**
@@ -171,6 +286,25 @@ mean line and a few outlier peaks.
   A) "Per-SNP F_ST plotted along genomic position, mostly low with a few tall peaks rising above the genome-wide average line."
   B) "Genome scan showing most loci weakly differentiated between populations and a handful of strongly differentiated outlier regions."
 -->
+
+## $F_{ST}$ depends on how you sampled
+
+$F_{ST}$ assumes **discrete demes**. But when dispersal is limited, differentiation rises
+*continuously* with distance — **isolation by distance** [@wright1943].
+
+::: {.callout-important}
+Under IBD there is **no single "the" $F_{ST}$** for a species. Its value scales with the
+**geographic extent of your sampling**: sample one meadow and get $F_{ST}\approx0$; sample
+across a range and get a large value — from the *same* underlying process. Two studies can
+report wildly different $F_{ST}$ purely from sampling design.
+:::
+
+- Always report the **spatial scale and design** alongside any $F_{ST}$.
+- If structure is continuous, a **single number is the wrong summary** — model the gradient
+  instead.
+
+<span class="xref">→ we develop this properly (Rousset's regression, Mantel tests, effective
+migration surfaces) in **Structure in space**, later this lecture.</span>
 
 # Correlations among loci {.center}
 
@@ -207,15 +341,137 @@ by selfing (deck 03).</span>
 
 # Visualizing structure {.center}
 
-## Principal component analysis (PCA)
+## The data: a genotype matrix
+
+Start with $N$ individuals genotyped at $S$ biallelic SNPs. Individual $i$ at locus $\ell$:
+
+$$
+g_{i\ell} \in \{0, 1, 2\} \quad(\text{copies of allele } A_1),
+$$
+
+giving an $N \times S$ matrix — and in genomics **$N \ll S$** (dozens of plants, millions of
+SNPs).
+
+- Every SNP is an axis: the data live in $S$-dimensional space, far too many to look at.
+- **PCA's job:** find a *few* axes that capture most of the variation, and place each
+  individual on them.
+
+## Standardizing the genotypes
+
+Before decomposing, standardize each SNP [@coop_notes]:
+
+$$
+\frac{g_{i\ell} - 2p_\ell}{\sqrt{2p_\ell(1 - p_\ell)}} .
+$$
+
+:::: {.columns}
+
+::: {.column width="52%"}
+- **Center** by the mean genotype $2p_\ell$ — so the analysis is about *deviations* from the
+  sample allele frequency.
+- **Scale** by $\sqrt{2p_\ell(1-p_\ell)}$, the binomial SD expected if alleles were drawn at
+  frequency $p_\ell$.
+:::
+
+::: {.column width="48%"}
+::: {.callout-note}
+Without scaling, **common** SNPs (large $2pq$) would dominate purely because they vary more.
+Standardizing gives each SNP comparable weight — the same $2pq$ that measured heterozygosity
+in deck 01, here used as a yardstick.
+:::
+:::
+
+::::
+
+## PCA = eigendecomposition of a kinship matrix
+
+Equivalently, build the **individual × individual** covariance matrix, with entry $[i,j]$:
+
+$$
+\frac{1}{S-1}\sum_{\ell=1}^{S}
+\frac{(g_{i\ell} - 2p_\ell)(g_{j\ell} - 2p_\ell)}{2p_\ell(1 - p_\ell)},
+$$
+
+then take its **eigendecomposition**: **eigenvectors = the PCs**, **eigenvalues = variance
+explained**.
+
+:::: {.columns}
+
+::: {.column width="54%"}
+::: {.callout-important}
+This covariance matrix **is a kinship matrix** — it measures how much two individuals share
+alleles *above* what random draws from the sample would give. So **PCA finds the major
+orthogonal axes of relatedness**, a direct cousin of our $F$-statistics-as-correlations.
+:::
+:::
+
+::: {.column width="46%"}
+::: {.figure-prompt}
+**FIGURE** — kinship heatmap (individuals × individuals, clustered) beside the resulting PC
+scatter, showing that clusters in the heatmap become clusters in PC space.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "A clustered individual-by-individual kinship heatmap next to a scatter of the same individuals on the first two principal components."
+  B) "Illustration that principal components are the major axes of the genetic kinship matrix."
+-->
+:::
+
+::::
+
+::: {.notes}
+Worth mentioning: McVean (2009) showed PCA also has a **genealogical** interpretation —
+expected positions on the PC axes are functions of **mean coalescent times** between samples.
+So PCA is not just a black-box projection; it summarizes shared ancestry
+(→ the coalescent, deck 01).
+:::
+
+## Equivalently: a singular value decomposition
+
+In practice software runs an **SVD** on the standardized matrix $\mathbf{X}$:
+
+$$
+\mathbf{X} = \mathbf{U}\,\mathbf{D}\,\mathbf{V}^{\!\top}.
+$$
+
+- $\mathbf{U}\mathbf{D}$ → **PC scores** (where each *individual* sits).
+- $\mathbf{V}$ → **SNP loadings** (how much each *locus* contributes to each axis).
+- $\mathbf{D}$ → singular values; squared, they give the eigenvalues / variance explained.
+
+::: {.callout-tip}
+Loadings matter biologically: a PC driven by a **few high-loading SNPs in one genomic region**
+often reflects an **inversion** or a large-effect locus, not genome-wide ancestry. New samples
+can also be *projected* onto existing axes using $\mathbf{V}$.
+:::
+
+## How many PCs are real?
+
+- Plot the **eigenvalues** (a *scree* plot): real structure shows up as eigenvalues standing
+  clearly above the noise floor; the rest is sampling noise.
+- @patterson2006 formalized this — under the null of no structure the largest eigenvalue
+  follows a **Tracy–Widom** distribution, giving a significance test for each PC.
+
+::: {.callout-important}
+There is also a **detection threshold**: if differentiation is weak relative to your sample
+size and number of markers, the structure is **invisible to PCA no matter how you plot it** —
+the leading eigenvalue simply doesn't separate from the noise. More markers and more
+individuals both help.
+:::
+
+- Rule of thumb: interpret only the PCs that pass a test *and* have a sensible biological
+  reading. Later PCs frequently capture batch effects, relatedness, or a single family.
+
+## Reading a PCA in practice
 
 :::: {.columns}
 
 ::: {.column width="50%"}
-- Decompose the centered genotype matrix; the leading PCs are **axes of greatest allele-
-  frequency variation** — usually geography/ancestry.
-- Model-free, fast, no assumed $K$.
-- Caveat: PCs reflect sampling and can be distorted by relatedness and uneven sample sizes.
+- Model-free and fast — **no assumed $K$**, unlike ADMIXTURE (next).
+- **Admixed individuals fall *between* their parental clusters** — a hybrid sits on the line
+  connecting the two sources, roughly in proportion to ancestry.
+- Caveats: PCs reflect **sampling design**; uneven sample sizes and families/relatives can
+  create or distort axes.
 :::
 
 ::: {.column width="50%"}
@@ -232,6 +488,116 @@ colored by geographic origin.
 :::
 
 ::::
+
+# Structure in space {.center}
+
+## Isolation by distance
+
+Not all structure comes in discrete demes. When dispersal is limited, differentiation grows
+**continuously with geographic distance** — Wright's **isolation by distance**
+[@wright1943].
+
+:::: {.columns}
+
+::: {.column width="54%"}
+- Neighbors mate more often than distant individuals ⟹ nearby populations are more similar.
+- Especially relevant for plants: **pollen and seed dispersal** are usually local, so IBD is
+  the default expectation rather than the exception.
+
+**Rousset's regression** [@rousset1997] makes this quantitative — regress
+
+$$
+\frac{F_{ST}}{1 - F_{ST}} \;\sim\; \text{distance (1-D)}\ \ \text{or}\ \ \log(\text{distance})\ \text{(2-D)} .
+$$
+
+- The **slope is inversely proportional to Wright's neighborhood size** ($\approx 4\pi D\sigma^2$
+  in two dimensions) — so the *slope*, not $F_{ST}$ itself, estimates dispersal.
+- Test significance with a **Mantel test** (permute one distance matrix).
+:::
+
+::: {.column width="46%"}
+::: {.figure-prompt}
+**FIGURE** — genetic distance (or $F_{ST}/(1-F_{ST})$) plotted against geographic distance,
+showing a positive isolation-by-distance slope.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Scatter plot of pairwise genetic differentiation against geographic distance with a positive linear trend."
+  B) "Isolation-by-distance pattern in which populations further apart are genetically more different."
+-->
+:::
+
+::::
+
+## Genes mirror geography — and a warning
+
+@novembre2008genes famously showed that a PCA of European genotypes reproduces the **map of
+Europe**: PC1 and PC2 recover north–south and east–west geography.
+
+. . .
+
+But be careful about *interpreting* those axes:
+
+::: {.callout-warning}
+@novembrestephens2008 showed that under smooth **isolation by distance**, the leading PCs are
+**sinusoidal (Fourier-like) gradients** — a mathematical property of spatially autocorrelated
+data, **not** a record of historical migration. A gradient across a PCA map is *not*, by
+itself, evidence of a migration wave.
+:::
+
+::: {.figure-prompt}
+**FIGURE** — two panels: (a) PCA of European samples recapitulating the map; (b) the
+sinusoidal PC gradients expected under pure isolation by distance.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Side-by-side panels showing a PCA that mirrors a geographic map and the wave-like principal-component gradients predicted under isolation by distance."
+  B) "Illustration that smooth spatial genetic structure produces sinusoidal principal components that can be mistaken for migration events."
+-->
+
+::: {.notes}
+Coop's greenish-warbler **ring species** is the classic case: samples arranged around the
+Himalayan plateau, where PC space traces the two routes of expansion around the ring.
+:::
+
+## Effective migration surfaces (EEMS / FEEMS)
+
+PCA tells you *that* samples are spatially structured. **Effective migration surfaces** ask
+*where gene flow is unusually easy or hard* [@petkova2016].
+
+:::: {.columns}
+
+::: {.column width="54%"}
+- Fit a **stepping-stone model on a spatial grid** overlaid on the sampling region.
+- Estimate an **effective migration rate** for each grid edge, then map deviations from what
+  plain isolation by distance predicts:
+  - **corridors** — migration *higher* than expected,
+  - **barriers** — migration *lower* than expected.
+- **FEEMS** [@marcus2021] fits the same idea far faster for genome-scale data.
+:::
+
+::: {.column width="46%"}
+::: {.figure-prompt}
+**FIGURE** — EEMS map: sampling locations on a grid with colored edges — blue corridors (high
+effective migration) and brown/orange barriers (low), over a landscape.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Map of a study region overlaid with a grid whose edges are colored to show where effective migration is higher or lower than expected under isolation by distance."
+  B) "Estimated effective migration surface highlighting corridors and barriers to gene flow across a landscape."
+-->
+:::
+
+::::
+
+- Plant reading: barriers often track **mountain ranges, rivers, soil discontinuities**, or
+  limits on **pollinator and seed dispersal**.
+
+<span class="xref">→ formal migration models and $F_{ST}=1/(1+4N_em)$ (deck 06); environmental
+gradients and GEA (deck 05).</span>
 
 ## Model-based clustering (STRUCTURE / ADMIXTURE)
 
@@ -274,9 +640,25 @@ D = p_{AB} - p_A p_B
 r^2 = \frac{D^2}{p_Aq_A\,p_Bq_B}
 $$
 
+$$
+G_{ST} = \frac{H_T - H_S}{H_T}
+\qquad
+\max G_{ST} \approx 1 - H_S
+\qquad
+\frac{F_{ST}}{1-F_{ST}} \sim \text{distance}
+$$
+
 - Inbreeding and structure are one phenomenon at **different reference levels**.
 - Pooling differentiated demes deficits heterozygotes (**Wahlund**) and builds **LD**.
 - PCA and ADMIXTURE **describe** structure; $F_{ST}$ and $D$ **quantify** it.
+- $G_{ST}$ hits a **ceiling** set by within-population diversity ⟹ use **$G'_{ST}$/Jost's $D$**
+  for polymorphic markers, and report *which estimator* (Weir & Cockerham's $\theta$) you used.
+- **AMOVA** partitions variance hierarchically and uses **distances** between haplotypes.
+- Under **isolation by distance** a single $F_{ST}$ is scale-dependent — model the gradient.
+- **PCA** = eigendecomposition of a **kinship matrix** built from standardized genotypes —
+  the axes are axes of *relatedness*, not arbitrary projections.
+- Structure is often **continuous in space** (isolation by distance); **effective migration
+  surfaces** locate the corridors and barriers behind it.
 
 # References {.center}
 

@@ -22,6 +22,8 @@ By the end you should be able to:
 - Derive when **selection beats migration** to maintain a locally adaptive allele.
 - Interpret **clines** along environmental gradients.
 - Outline how **$F_{ST}$ outliers** and **GEA** detect adaptive loci, and their pitfalls.
+- Explain **RDA** as constrained ordination — regression then PCA of the fitted values — and
+  how **partial RDA** corrects for population structure.
 
 # Selection in one population {.center}
 
@@ -161,12 +163,151 @@ $$
 $$
 
 - $\beta_1 \neq 0$ ⟹ the locus tracks the environment beyond what structure explains.
-- Common tools (**conceptual** here): **LFMM**, **RDA**, **BayPass**.
+- Common tools: **LFMM**, **RDA**, **BayPass**.
 
 ::: {.notes}
 The hard part is always the structure correction: latitude correlates with both climate
 and ancestry, so without it you recover demography, not adaptation. This is the crux of the
 Sep 17 discussion paper (Dauphin et al. 2020).
+:::
+
+# Redundancy analysis (RDA) {.center}
+
+## From univariate to multivariate GEA
+
+The regression above is **univariate**: one locus, one variable, one test at a time.
+
+:::: {.columns}
+
+::: {.column width="54%"}
+Two problems:
+
+- **Multiple testing** — millions of SNPs × several climate variables.
+- It **misses covariation**. Local adaptation is usually **polygenic**: many loci each shifting
+  a little, *together*, along the same gradient. No single locus looks impressive.
+:::
+
+::: {.column width="46%"}
+**RDA** analyzes everything at once. Two matrices:
+
+- $\mathbf{Y}$: $n \times L$ — sites (or individuals) × loci (allele frequencies/genotypes).
+- $\mathbf{X}$: $n \times p$ — the same sites × environmental predictors.
+:::
+
+::::
+
+::: {.callout-note}
+RDA is **constrained ordination** — and, as we'll see, it is literally **PCA of the part of
+the genetic data that the environment can explain**.
+<span class="xref">→ builds directly on the PCA theory, deck 02.</span>
+:::
+
+## Step 1 — a multivariate multiple regression
+
+Regress **every locus** on **all** environmental predictors simultaneously:
+
+$$
+\hat{\mathbf{Y}} = \mathbf{X}\left(\mathbf{X}^{\!\top}\mathbf{X}\right)^{-1}\mathbf{X}^{\!\top}\mathbf{Y}
+= \mathbf{H}\,\mathbf{Y},
+$$
+
+where $\mathbf{H}$ is the **projection ("hat") matrix** — it projects the genetic data onto the
+space spanned by the environmental variables.
+
+This splits the genetic variation in two:
+
+$$
+\mathbf{Y} = \underbrace{\hat{\mathbf{Y}}}_{\text{explained by environment}}
+\;+\; \underbrace{\mathbf{Y}_{\text{res}}}_{\text{everything else}} .
+$$
+
+## Step 2 — PCA of the fitted values
+
+Now ordinate the **fitted** matrix: eigendecompose $\hat{\mathbf{Y}}^{\!\top}\hat{\mathbf{Y}}$.
+
+:::: {.columns}
+
+::: {.column width="54%"}
+- Eigenvectors → **constrained (RDA) axes**; each is a **linear combination of the
+  environmental predictors**.
+- Eigenvalues → variance explained by each axis.
+- Ordinating $\mathbf{Y}_{\text{res}}$ instead gives the **unconstrained** (ordinary PC) axes.
+- At most $\min(p,\,L,\,n-1)$ constrained axes exist — you can't have more axes than predictors.
+:::
+
+::: {.column width="46%"}
+::: {.figure-prompt}
+**FIGURE** — RDA **triplot**: sites as points, SNPs as a cloud, environmental predictors as
+arrows, on RDA1 vs RDA2.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Redundancy analysis triplot showing sampling sites, SNP loadings, and environmental predictor arrows on the first two constrained axes."
+  B) "RDA triplot in which SNPs align with the environmental gradients they track."
+-->
+:::
+
+::::
+
+::: {.callout-important}
+**RDA = PCA restricted to the subspace $\mathbf{X}$ can explain.** Same eigendecomposition as
+deck 02 — applied to $\hat{\mathbf{Y}}$ instead of $\mathbf{Y}$. That single substitution turns
+a *description* of structure into a *test* of environmental association.
+:::
+
+## Significance, $R^2$, and partial RDA
+
+**How much environment?** Total variance ("inertia") = constrained + unconstrained; the
+constrained fraction is an $R^2$ — report the **adjusted $R^2$**, since $R^2$ inflates with
+more predictors.
+
+**Is it real?** **Permutation tests** — shuffle the rows of $\mathbf{X}$ to break the
+site–environment link, refit many times, and compare (global model and axis by axis).
+
+. . .
+
+**Partial RDA (pRDA)** — condition on covariates $\mathbf{Z}$ (PC axes, geography, ancestry
+coefficients):
+
+$$
+\mathbf{Y} \sim \mathbf{X} \mid \mathbf{Z}
+$$
+
+::: {.callout-important}
+**This is the structure correction.** pRDA partitions variance into **pure environment**,
+**pure structure/geography**, and the **confounded** overlap between them — exactly the
+latitude-vs-climate problem flagged earlier [@capblancq2021].
+:::
+
+::: {.figure-prompt}
+**FIGURE** — variance-partitioning Venn: pure environment / pure structure / confounded
+overlap / unexplained.
+:::
+
+<!-- ALT TEXT (required when the image is added) — pick & refine one,
+     then set as fig-alt="…" on the ![](…) you insert:
+  A) "Venn diagram partitioning genetic variance into components explained purely by environment, purely by population structure, and by their overlap."
+  B) "Variance partitioning from a partial redundancy analysis separating environmental from demographic signal."
+-->
+
+## Pulling out candidate loci
+
+Candidates are SNPs with **extreme loadings** on the significant RDA axes — the tails of the
+loading distribution (a common rule is $\pm 3$ SD) [@forester2018].
+
+- **Which axis** a SNP loads on tells you **which environmental gradient** it tracks — a
+  built-in bonus the univariate scan doesn't give you.
+
+| Method | Flavor | Structure control | Best at |
+|---|---|---|---|
+| **RDA** | multivariate ordination | covariates via **pRDA** | **polygenic**, covarying signal |
+| **LFMM** | univariate + latent factors | latent factors | single strong-effect loci |
+| **BayPass** | Bayesian | allele-frequency covariance null | explicit demographic null |
+
+::: {.callout-warning}
+All GEA methods are **correlational**. A candidate is a hypothesis — validate with common
+gardens, transplant experiments, or functional work.
 :::
 
 ## Plants are the model systems here
@@ -269,6 +410,9 @@ $$
 - **Clines** are its geographic signature; width $\sim \sigma/\sqrt{s}$.
 - **$F_{ST}$ outliers** and **GEA** find the loci — both demand a **structure/demography
   control** to avoid false positives.
+- **RDA** = regression + PCA of the fitted values (constrained ordination); it catches
+  **polygenic** signal that locus-by-locus tests miss, and **pRDA** supplies the structure
+  control by partitioning environment from demography.
 
 # References {.center}
 
