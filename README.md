@@ -1,6 +1,6 @@
 # Plant Evolutionary Biology
 
-This is the GitHub repository used to manage materials for the class *Plant Evolutionary Biology*. You likely meant to navigate towards the rendered html via the website [here](https://gtiley.github.io/Plant-Evolutionary-Biology).
+This is the GitHub repository used to manage materials for the class *Plant Evolutionary Biology*. You likely meant to navigate to the rendered HTML via the website [here](https://gtiley.github.io/Plant-Evolutionary-Biology).
 
 The website can be rendered locally with `jekyll` after cloning the repo. For example:
 ```
