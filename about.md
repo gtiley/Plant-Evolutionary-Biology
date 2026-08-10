@@ -30,13 +30,4 @@ permalink: /about/
 
 ## Instructors
 
-[George Tiley](https://cals.ncsu.edu/plant-and-microbial-biology/people/gptiley/). Please reach out with questions about the class in advance if helpful for your planning. Office hours will be posted as we get closer to the semester start date.
-
-<!--
-| Name                 |Role                           | Contact        | Office hours                                                   |
-|----------------------|-------------------------------|----------------|----------------------------------------------------------------|
-| George Tiley         | Professor                     |                |  Twice a week, two hours                                       |
-|TBD                   | TA                            |                |  Twice a week, two hours                                       |
-|TBD                   | Undergrad TA                  |                |  Once a week, two hours                                        |
-|----------------------|-------------------------------|----------------|----------------------------------------------------------------|
--->
+[George Tiley](https://cals.ncsu.edu/plant-and-microbial-biology/people/gptiley/). **Office hours** are available on Tuesday and Wednesday from 1:00-2:00pm at 4111 Gardner. Email is the best means of communication outside of class.
