@@ -30,7 +30,7 @@ permalink: /about/
 
 ## Instructors
 
-[George Tiley](https://cals.ncsu.edu/plant-and-microbial-biology/people/gptiley/). **Office hours** are available on Tuesday and Wednesday from 1:00-2:00pm at 4111 Gardner. Email is the best means of communication outside of class.
+[George Tiley](https://cals.ncsu.edu/plant-and-microbial-biology/people/gptiley/) -- **Office hours** are available on Tuesday from 1:00-2:00pm and Thursday from 3:00-4:00pm at 4111 Gardner. Email is the best means of communication outside of class. Please reach out if you need arrangements outside of typical office hours. Include **PB495** or **PB595** in the email subject line to ensure a fast response time.
 
 <!--
 Comment to unstick actions with new commit
