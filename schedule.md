@@ -32,8 +32,8 @@ Activity overview
 
 |Date         |Module               | Topic                       | Assigned Reading               | Slides and Resources              |
 |------------|------------|------------|------------|------------|
-|18 August    | Introduction        | Why Plants? An overview of early plant evolution | Syllabus | slides|
-|20 August    | Introduction        | Random variables, probability theory, and stochastic processes  | Poisson Processes |  slides|
+|18 August    | Introduction        | Why Plants? An overview of early plant evolution | course information on moodle | slides on moodle|
+|20 August    | Introduction        | Random variables, probability theory, and stochastic processes  | [Poisson Processes]({{site.baseurl}}/readings/poisson-in-nature.html) |  [slides]({{site.baseurl}}/slides/intro/02-random-variables.html)|
 |25 August    | Population Genomics | Genetic Diversity | Estimating Genetic Diversity | slides |
 |27 August    | Population Genomics | Population Structure | NA  | slides|
 |01 September | Population Genomics | Outcrossing, Selfers, and Apomicts | NA  | slides; computer activity |

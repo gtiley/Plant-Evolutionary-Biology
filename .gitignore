@@ -5,7 +5,6 @@
 # Quarto slide build artifacts
 /slides/_site
 /slides/.quarto
-/slides/popgen/*_files
 
 # Standalone exercise / notebook / practical render artifacts
 /slides/popgen/exercises/*.html
