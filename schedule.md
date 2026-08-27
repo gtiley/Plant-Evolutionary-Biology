@@ -34,10 +34,10 @@ Activity overview
 |------------|------------|------------|------------|------------|
 |18 August    | Introduction        | Why Plants? An overview of early plant evolution | course information on moodle | slides on moodle|
 |20 August    | Introduction        | Random variables, probability theory, and stochastic processes  | [Poisson Processes]({{site.baseurl}}/readings/poisson-in-nature.html) |  [slides]({{site.baseurl}}/slides/intro/02-random-variables.html)|
-|25 August    | Population Genomics | Genetic Diversity | Estimating Genetic Diversity | slides |
-|27 August    | Population Genomics | Population Structure | NA  | slides|
-|01 September | Population Genomics | Outcrossing, Selfers, and Apomicts | NA  | slides; computer activity |
-|03 September | Population Genomics | Structure across the Genome | [Rivera-Rodríguez et al. 2023](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0291944) | class discussion |
+|25 August    | Population Genomics | Genetic Diversity | [Estimating Genetic Diversity]({{site.baseurl}}/readings/diversity-stats-worksheet.html) | slides on moodle |
+|27 August    | Population Genomics | Population Structure | NA  | [slides]({{site.baseurl}}/slides/popgen/02-population-sructure.html) on moodle|
+|01 September | Population Genomics | Outcrossing, Selfers, and Apomicts | NA  | computer activity |
+|03 September | Population Genomics | Structure and life history | [McAllister and Miller 2016](https://bsapubs.onlinelibrary.wiley.com/doi/10.3732/ajb.1600146) | class discussion |
 |08 September | Population Genomics | Selection and Demography | The Site Frequency Spectrum | slides |
 |10 September | Population Genomics | Local Adaptation and Environmental Associations | NA | slides; computer activity |
 |15 September | Population Genomics | Gene Flow and Polyploidy| NA  | slides |
