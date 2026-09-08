@@ -38,9 +38,9 @@ Activity overview
 |27 August    | Population Genomics | Population Structure | NA  | [slides]({{site.baseurl}}/slides/popgen/02-population-structure.html) on moodle|
 |01 September | Population Genomics | Outcrossing, Selfers, and Apomicts | NA  | [computer activity]({{site.baseurl}}/activities/activity-1.html) |
 |03 September | Population Genomics | Structure and life history | [McAllister and Miller 2016](https://bsapubs.onlinelibrary.wiley.com/doi/10.3732/ajb.1600146) | class discussion |
-|08 September | Population Genomics | Selection and Demography | The Site Frequency Spectrum | slides |
-|10 September | Population Genomics | Local Adaptation and Environmental Associations | NA | slides; computer activity |
-|15 September | Population Genomics | Gene Flow and Polyploidy| NA  | slides |
+|08 September | Population Genomics | Selection and Demography | The Site Frequency Spectrum (released after class) | [slides]({{site.baseurl}}/slides/popgen/04-selection-demography.html) on moodle |
+|10 September | Population Genomics | Gene Flow and Polyploidy| NA  | slides |
+|15 September | Population Genomics | Local Adaptation and Environmental Associations | NA | computer activity |
 |17 September | Population Genomics | Environmental Associations: GEA | [Dauphin et al. 2020](https://onlinelibrary.wiley.com/doi/10.1111/mec.15467) | class discussion |
 |------------|------------|------------|------------|------------|
 |22 September | Exams | Exam 1: Population Genomics           | NA                               | NA                              |    
