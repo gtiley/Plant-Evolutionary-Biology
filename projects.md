@@ -18,7 +18,7 @@ All students in the class, including those enrolled in 595, take part in the pos
 
 | Stage | Points | Due |
 |-------|--------|-----|
-| Project 1: Proposal | 20 | Friday 25 September |
+| [Project 1: Proposal]({{site.baseurl}}/poster-proposal/) | 20 | Friday 25 September |
 | Project 2: First draft (for peer review) | 20 | Friday 23 October |
 | Project 3: Final, print-ready draft | 50 | Monday 16 November |
 | Project 4: Poster presentation | 50 | Tuesday 1 December |
