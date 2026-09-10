@@ -36,10 +36,10 @@ Activity overview
 |20 August    | Introduction        | Random variables, probability theory, and stochastic processes  | [Poisson Processes]({{site.baseurl}}/readings/poisson-in-nature.html) |  [slides]({{site.baseurl}}/slides/intro/02-random-variables.html)|
 |25 August    | Population Genomics | Genetic Diversity | [Estimating Genetic Diversity]({{site.baseurl}}/readings/diversity-stats-worksheet.html) and [answers]({{site.baseurl}}/assets/diversity_stats_answers.pdf) | slides on moodle |
 |27 August    | Population Genomics | Population Structure | NA  | [slides]({{site.baseurl}}/slides/popgen/02-population-structure.html) on moodle|
-|01 September | Population Genomics | Outcrossing, Selfers, and Apomicts | NA  | [computer activity]({{site.baseurl}}/activities/activity-1.html) |
+|01 September | Population Genomics | Structure applied | NA  | [computer activity]({{site.baseurl}}/activities/activity-1.html) |
 |03 September | Population Genomics | Structure and life history | [McAllister and Miller 2016](https://bsapubs.onlinelibrary.wiley.com/doi/10.3732/ajb.1600146) | class discussion |
-|08 September | Population Genomics | Selection and Demography | The Site Frequency Spectrum (released after class) | [slides]({{site.baseurl}}/slides/popgen/04-selection-demography.html) on moodle |
-|10 September | Population Genomics | Gene Flow and Polyploidy| NA  | slides |
+|08 September | Population Genomics | Selection and Demography | [The Site Frequency Spectrum](({{site.baseurl}}/readings/sfs-worksheet.html)) | [slides]({{site.baseurl}}/slides/popgen/04-selection-demography.html) on moodle |
+|10 September | Population Genomics | Selection continued and Local Adaptation| NA  | [slides]({{site.baseurl}}/slides/popgen/05-local-adaptation.html) on moodle |
 |15 September | Population Genomics | Local Adaptation and Environmental Associations | NA | computer activity |
 |17 September | Population Genomics | Environmental Associations: GEA | [Dauphin et al. 2020](https://onlinelibrary.wiley.com/doi/10.1111/mec.15467) | class discussion |
 |------------|------------|------------|------------|------------|
