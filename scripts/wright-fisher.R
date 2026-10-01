@@ -1,8 +1,8 @@
 set.seed(1234)
 
 # Parameters you can change directly.
-N <- 1000
-p0 <- 0.05
+N <- 100
+p0 <- 0.1
 n_generations <- 1000
 n_replicates <- 100
 
@@ -32,7 +32,13 @@ for (replicate in seq_len(n_replicates)) {
   }
 
   # Add this replicate's trajectory to the existing plot.
-  lines(freq, col = sample(colours(), 1))
+  if (freq[length(freq)] == 0) {
+    lines(freq, col = "#BA3B46")
+  }
+  
+  if (freq[length(freq)] > 0) {
+    lines(freq, col = "#1C5D99")
+  }
 
   # Save the final allele frequency for this replicate.
   final_freqs[replicate] <- freq[n_generations]

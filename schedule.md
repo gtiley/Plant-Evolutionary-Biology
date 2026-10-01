@@ -51,13 +51,13 @@ Activity overview
 |------------|------------|------------|------------|------------|
 |29 September | No Class!       | Wellness Day  |  NA       | NA                                    |
 |------------|------------|------------|------------|------------|
-|01 October | Speciation Genomics |Plant Speciation Mechanisms | NA | slides |
-|06 October | Speciation Genomics |Species Delimitation: Integrative Taxonomy | [Mayo 2022](https://link.springer.com/article/10.1007/s12225-022-10002-x)| slides|
+|01 October | Speciation Genomics |Plant Speciation Mechanisms | NA | [slides]({{site.baseurl}}/slides/speciation/02-speciation-mechanisms.html) |
+|06 October | Speciation Genomics |Phylogenetics: Theory and Overview | NA | slides |
 |08 October | Speciation Genomics |Speciation with Adaptive Introgression | NA | slides; computer activity  |
 |------------|------------|------------|------------|------------|
 |09 October | Project (595)  | 595 Research Proposal: One-Pager Due  |  NA       | [Project Guidelines]({{site.baseurl}}/projects)          |
 |------------|------------|------------|------------|------------|
-|13 October | Speciation Genomics |Phylogenetics: Theory and Overview | NA | slides |
+|13 October | Speciation Genomics |Species delimitation and integrative taxonomy of blueberries| [Mayo 2022](https://link.springer.com/article/10.1007/s12225-022-10002-x)| slides|
 |15 October | Speciation Genomics |Species complexes and species networks: Examples from blueberries | TBD | class discussion |
 |------------|------------|------------|------------|------------|
 |20 October | No Class!       | Fall Break  |  NA       | NA                                    |
