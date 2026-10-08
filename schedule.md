@@ -53,7 +53,7 @@ Activity overview
 |------------|------------|------------|------------|------------|
 |01 October | Speciation Genomics |Plant Speciation Mechanisms | NA | [slides]({{site.baseurl}}/slides/speciation/02-speciation-mechanisms.html) |
 |06 October | Speciation Genomics |Phylogenetics: Theory and Overview | NA | [slides]({{site.baseurl}}/slides/speciation/03-phylogenetics-pt1.html)  |
-|08 October | Speciation Genomics |Speciation Delimitation with Adaptive Introgression | NA | slides  |
+|08 October | Speciation Genomics |Speciation Delimitation with Adaptive Introgression | NA | [slides]({{site.baseurl}}/slides/speciation/04-phylogenetics-theory-plants-pt2.html)  |
 |------------|------------|------------|------------|------------|
 |09 October | Project (595)  | 595 Research Proposal: One-Pager Due  |  NA       | [Project Guidelines]({{site.baseurl}}/projects)          |
 |------------|------------|------------|------------|------------|
