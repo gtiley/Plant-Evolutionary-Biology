@@ -57,7 +57,7 @@ Activity overview
 |------------|------------|------------|------------|------------|
 |09 October | Project (595)  | 595 Research Proposal: One-Pager Due  |  NA       | [Project Guidelines]({{site.baseurl}}/projects)          |
 |------------|------------|------------|------------|------------|
-|13 October | Speciation Genomics |Speciation and rapid radiations through pollinator syndrome| NA | computer activity|
+|13 October | Speciation Genomics |Speciation and rapid radiations through pollinator syndrome| NA | [computer activity]({{site.baseurl}}/activities/activity-3.html)|
 |15 October | Speciation Genomics |Speciation with gene flow | [Stone and Wessinger 2024](https://academic.oup.com/mbe/article/41/1/msae007/7564791) | class discussion |
 |------------|------------|------------|------------|------------|
 |20 October | No Class!       | Fall Break  |  NA       | NA                                    |
