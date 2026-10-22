@@ -62,7 +62,7 @@ Activity overview
 |------------|------------|------------|------------|------------|
 |20 October | No Class!       | Fall Break  |  NA       | NA                                    |
 |------------|------------|------------|------------|------------|
-|22 October | Speciation Genomics | Estimating the timescale and rate of evolution| NA  | slides |
+|22 October | Speciation Genomics | Estimating the timescale and rate of evolution| NA  | [slides]({{site.baseurl}}/slides/speciation/06-molecular-dating.html) |
 |------------|------------|------------|------------|------------|
 |23 October | Class Project       | Class Project 2: First Draft Due  |  NA       | [Project Guidelines]({{site.baseurl}}/projects)                                     |
 |------------|------------|------------|------------|------------|
