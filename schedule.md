@@ -68,7 +68,7 @@ Activity overview
 |------------|------------|------------|------------|------------|
 |27 October | Exams | Exam 2: Speciation Genomics           | NA                               | NA                              |    
 |------------|------------|------------|------------|------------|
-|29 October  | Macroevolution | Species-level diversity: More than population-level processes? | NA                               | [slides]({{site.baseurl}}/slides/speciation/01-species-level-diversity.html)                              |    
+|29 October  | Macroevolution | Species-level diversity: More than population-level processes? | NA                               | [slides]({{site.baseurl}}/slides/macro/01-species-level-diversity.html)                              |    
 |03 November| Macroevolution | Comparative Methods: Theory and Overview | NA | slides |
 |04 November | Class Project |  Poster Help Session (optional, outside class time) | NA | workshop |
 |05 November| Macroevolution | Comparative Methods: Evolution of Nodulation and Nitrogen Fixation | [Zhao et al. 2021](https://www.cell.com/molecular-plant/fulltext/S1674-2052(21)00072-1) | class discussion|
