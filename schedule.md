@@ -69,28 +69,31 @@ Activity overview
 |27 October | Exams | Exam 2: Speciation Genomics           | NA                               | NA                              |    
 |------------|------------|------------|------------|------------|
 |29 October  | Macroevolution | Species-level diversity: More than population-level processes? | NA                               | [slides]({{site.baseurl}}/slides/macro/01-species-level-diversity.html)                              |    
-|03 November| Macroevolution | Comparative Methods: Theory and Overview | NA | slides |
-|04 November | Class Project |  Poster Help Session (optional, outside class time) | NA | workshop |
-|05 November| Macroevolution | Comparative Methods: Evolution of Nodulation and Nitrogen Fixation | [Zhao et al. 2021](https://www.cell.com/molecular-plant/fulltext/S1674-2052(21)00072-1) | class discussion|
+|03 November| Macroevolution | State-dependant diversification and comparative methods | NA | slides |
+|04 November | Class Project |  Poster Help Session (optional, outside class time) | Gardner 2212 (14:00-16:00)  | workshop |
+|05 November| Macroevolution | Diversification rates and selfing syndrome | [Goldberg et al. 2010](https://www.science.org/doi/10.1126/science.1194513) | computer activity and discussion combined |
 |06 November | Project (595) | 595 Research Proposal: First Draft Due | NA | [Project Guidelines]({{site.baseurl}}/projects) |
-|10 November| Macroevolution |Plant Genome Architecture: Polyploidy-revisited | [Tang et al. 2008](https://www.science.org/doi/full/10.1126/science.1153917?casa_token=N3vFtNdHh7cAAAAA%3AZq79033kHGBNXmQtbiE0TIkeZK_eQMCK0CBxxLeHRq6vtVkbRv6Ghi4dLKMUcCY5tFJHMPOz_0ld7Q) | slides|
-|11 November | Class Project |  Poster Help Session (optional, outside class time) | NA | workshop |
-|12 November | Macroevolution |Plant Genome Architecture: Reconciling Gene Families | NA | slides; computer activity |
+|10 November| Macroevolution | Biogeography: Diversifying in new spaces | NA | slides |
+|11 November | Class Project |  Poster Help Session (optional, outside class time) | Gardner 2212 (16:00-18:00) | workshop |
+|12 November | Macroevolution | Guest Lecture: Dr. Acer VanWallendael  | NA | TBD |
 |------------|------------|------------|------------|------------|
 |16 November   | Class Project | Class Project 3: Final, Print-Ready Draft Due    |  NA       | [Project Guidelines]({{site.baseurl}}/projects)                                      |
 |------------|------------|------------|------------|------------|
 |17 November | Macroevolution | The rise of pathways and key innovations | NA | slides|
-|19 November | Macroevolution | Trait-dependent diversification | NA | slides; computer activity|
+|19 November | Macroevolution | Duplication and polyploidy: Revisited | NA | slides |
 |20 November | Project (595) | 595 Research Proposal: Peer Reviews Returned | NA | [Project Guidelines]({{site.baseurl}}/projects) |
-|24 November | Macroevolution | Biogeographic Models | [Pérez-Escobar et. al. 2017](https://www.nature.com/articles/s41598-017-12300-y) | class discussion |
+|24 November | Macroevolution | The genome as a trait  | TBD | computer activity and discussion combined |
 |26 November | No Class!       | Thanksgiving Holiday  |  NA       | NA                                    |
 |------------|------------|------------|------------|------------|
 |01 December | Class Project | Class Project 4: Presentations | NA  |  [Project Guidelines]({{site.baseurl}}/projects)     |    
 |------------|------------|------------|------------|------------|
-|03 December | Exams | Exam 3: Macroevolution (university final examination period) | NA  |  NA  |
+|03 December | No Class! | Exam is scheduled 08 December | NA  |  NA  |
 |------------|------------|------------|------------|------------|
 |04 December | Project (595) | 595 Research Proposal: Final Proposal Due | NA | [Project Guidelines]({{site.baseurl}}/projects) |
 |------------|------------|------------|------------|------------|
+|08 December | Exams | Exam 3: Macroevolution (university final examination period) | NA  |  NA  |
+|------------|------------|------------|------------|------------|
+
                                                  
 ## Grading
 
