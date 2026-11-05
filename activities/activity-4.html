@@ -2352,8 +2352,8 @@ window.Quarto = {
   <li><a href="#fitting-bisse" id="toc-fitting-bisse" class="nav-link" data-scroll-target="#fitting-bisse">3. Fitting BiSSE</a></li>
   <li><a href="#bayesian-analyses-and-testing-the-dead-end-sc-hypothesis." id="toc-bayesian-analyses-and-testing-the-dead-end-sc-hypothesis." class="nav-link" data-scroll-target="#bayesian-analyses-and-testing-the-dead-end-sc-hypothesis.">4. Bayesian analyses and testing the dead-end SC hypothesis.</a></li>
   <li><a href="#a-trait-that-does-nothing" id="toc-a-trait-that-does-nothing" class="nav-link" data-scroll-target="#a-trait-that-does-nothing">5. A trait that does nothing</a></li>
-  <li><a href="#hidden-states" id="toc-hidden-states" class="nav-link" data-scroll-target="#hidden-states">8. Hidden states</a></li>
-  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">9. Takeaways</a></li>
+  <li><a href="#hidden-states" id="toc-hidden-states" class="nav-link" data-scroll-target="#hidden-states">6. Hidden states</a></li>
+  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">7. Takeaways</a></li>
   </ul>
 </nav>
 </div>
@@ -2797,7 +2797,7 @@ window.Quarto = {
 <p><strong>Q4: There is a real difference in diversification between states. Does that show that SI itself changes diversification? Can you think of other factors that would lead to transitions from SI to SC AND differences in diversification rates?</strong></p>
 </section>
 <section id="hidden-states" class="level1">
-<h1>8. Hidden states</h1>
+<h1>6. Hidden states</h1>
 <p>BiSSE imposes a limited hypothesis test. - <span class="math inline">\(H_O\)</span>: rates do not vary over the tree - <span class="math inline">\(H_A\)</span>: rates do vary over the tree, and that depends on the trait</p>
 <p><a href="https://doi.org/10.1093/sysbio/syw022">Beaulieu &amp; O’Meara (2016)</a> aimed to correct this limitation by letting rates vary for another reason, some unknown trait. In the CID models rates depend only on a hidden trait with 2 or 4 classes, and in HiSSE they depend on the observed (e.g. SI vs SC) <em>and</em> a hidden trait.</p>
 <p>The bigger models take about half an hour each to fit, so I ran them ahead of time with the paper’s assumptions. One fit looks like this, shown for reading and not for running.</p>
@@ -2874,7 +2874,7 @@ window.Quarto = {
 <p><strong>Q5: The fast hidden class is mostly <em>Solanum</em>. What do you think the hidden trait could be? What could you do to test that selection acts on SI itself and not an associated trait?</strong></p>
 </section>
 <section id="takeaways" class="level1">
-<h1>9. Takeaways</h1>
+<h1>7. Takeaways</h1>
 <ol type="1">
 <li><strong>SC is a capacity, not a mating system.</strong> The tree records the loss of SI, and selfing is a separate component.</li>
 <li><strong>Trees can be used to estimate diversification rates.</strong> There was high uncertainty in the speciation and extinction rates, but net diversification was quite reliable, even with a short MCMC chain.</li>
@@ -3798,7 +3798,7 @@ window.Quarto = {
 <span id="cb24-496"><a href="#cb24-496" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-497"><a href="#cb24-497" aria-hidden="true" tabindex="-1"></a>**Q4: There is a real difference in diversification between states. Does that show that SI itself changes diversification? Can you think of other factors that would lead to transitions from SI to SC AND differences in diversification rates?**</span>
 <span id="cb24-498"><a href="#cb24-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-499"><a href="#cb24-499" aria-hidden="true" tabindex="-1"></a><span class="fu"># 8. Hidden states</span></span>
+<span id="cb24-499"><a href="#cb24-499" aria-hidden="true" tabindex="-1"></a><span class="fu"># 6. Hidden states</span></span>
 <span id="cb24-500"><a href="#cb24-500" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-501"><a href="#cb24-501" aria-hidden="true" tabindex="-1"></a>BiSSE imposes a limited hypothesis test.</span>
 <span id="cb24-502"><a href="#cb24-502" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$H_O$: rates do not vary over the tree</span>
@@ -3896,7 +3896,7 @@ window.Quarto = {
 <span id="cb24-600"><a href="#cb24-600" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-601"><a href="#cb24-601" aria-hidden="true" tabindex="-1"></a>**Q5: The fast hidden class is mostly *Solanum*. What do you think the hidden trait could be? What could you do to test that selection acts on SI itself and not an associated trait?**</span>
 <span id="cb24-602"><a href="#cb24-602" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-603"><a href="#cb24-603" aria-hidden="true" tabindex="-1"></a><span class="fu"># 9. Takeaways</span></span>
+<span id="cb24-603"><a href="#cb24-603" aria-hidden="true" tabindex="-1"></a><span class="fu"># 7. Takeaways</span></span>
 <span id="cb24-604"><a href="#cb24-604" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-605"><a href="#cb24-605" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**SC is a capacity, not a mating system.** The tree records the loss of SI, and selfing is a separate component.</span>
 <span id="cb24-606"><a href="#cb24-606" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Trees can be used to estimate diversification rates.** There was high uncertainty in the speciation and extinction rates, but net diversification was quite reliable, even with a short MCMC chain.</span>
