@@ -73,7 +73,7 @@ Activity overview
 |04 November | Class Project |  Poster Help Session (optional, outside class time) | Gardner 2212 (14:00-16:00)  | workshop |
 |05 November| Macroevolution | Diversification rates and selfing syndrome | [Goldberg et al. 2010](https://www.science.org/doi/10.1126/science.1194513) | [computer activity]({{site.baseurl}}/activities/activity-4.html) and discussion combined |
 |06 November | Project (595) | 595 Research Proposal: First Draft Due | NA | [Project Guidelines]({{site.baseurl}}/projects) |
-|10 November| Macroevolution | Biogeography: Diversifying in new spaces | NA | slides |
+|10 November| Macroevolution | Biogeography: Diversifying in new spaces | [slides]({{site.baseurl}}/slides/macro/03-biogeography.html) | slides |
 |11 November | Class Project |  Poster Help Session (optional, outside class time) | Gardner 2212 (16:00-18:00) | workshop |
 |12 November | Macroevolution | Guest Lecture: Dr. Acer VanWallendael  | NA | TBD |
 |------------|------------|------------|------------|------------|
