@@ -79,7 +79,7 @@ Activity overview
 |------------|------------|------------|------------|------------|
 |16 November   | Class Project | Class Project 3: Final, Print-Ready Draft Due    |  NA       | [Project Guidelines]({{site.baseurl}}/projects)                                      |
 |------------|------------|------------|------------|------------|
-|17 November | Macroevolution | The rise of pathways and key innovations | NA | slides|
+|17 November | Macroevolution | The rise of pathways and key innovations | NA | slides |
 |19 November | Macroevolution | Duplication and polyploidy: Revisited | NA | slides |
 |20 November | Project (595) | 595 Research Proposal: Peer Reviews Returned | NA | [Project Guidelines]({{site.baseurl}}/projects) |
 |24 November | Macroevolution | The genome as a trait  | TBD | computer activity and discussion combined |
