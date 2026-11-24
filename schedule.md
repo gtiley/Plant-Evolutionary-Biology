@@ -80,9 +80,9 @@ Activity overview
 |16 November   | Class Project | Class Project 3: Final, Print-Ready Draft Due    |  NA       | [Project Guidelines]({{site.baseurl}}/projects)                                      |
 |------------|------------|------------|------------|------------|
 |17 November | Macroevolution | The rise of pathways and key innovations | NA | [slides]({{site.baseurl}}/slides/macro/05-key-innovations.html) |
-|19 November | Macroevolution | Duplication and polyploidy: Revisited | NA | slides |
+|19 November | Macroevolution | Duplication and polyploidy: Revisited | NA | [slides]({{site.baseurl}}/slides/macro/06-genome-architecture-polyploidy.html) |
 |20 November | Project (595) | 595 Research Proposal: Peer Reviews Returned | NA | [Project Guidelines]({{site.baseurl}}/projects) |
-|24 November | Macroevolution | The genome as a trait  | TBD | computer activity and discussion combined |
+|24 November | Macroevolution | Mapping WGDs  | [Ma et. al. 2021](https://academic.oup.com/plcell/article/33/4/846/6119336)   | [computer activity]({{site.baseurl}}/activities/activity-5.html) and discussion combined |
 |26 November | No Class!       | Thanksgiving Holiday  |  NA       | NA                                    |
 |------------|------------|------------|------------|------------|
 |01 December | Class Project | Class Project 4: Presentations | NA  |  [Project Guidelines]({{site.baseurl}}/projects)     |    
